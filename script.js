@@ -762,6 +762,7 @@ document.querySelectorAll(
 GALLERY
 ========================= */
 
+
 const galleryImages = [
     "1.jpg",
     "2.jpg",
@@ -773,129 +774,251 @@ const galleryImages = [
     "8.jpg"
 ];
 
+
 let galleryIndex = 0;
+
 
 const galleryImg = document.getElementById("gallery-image");
 const galleryMobile = document.getElementById("gallery-mobile");
+
 const galleryNext = document.getElementById("gallery-next");
 const galleryPrev = document.getElementById("gallery-prev");
 
+
+
 function changeGallery(index){
+
 
     const file = galleryImages[index];
 
+
+    if(!galleryImg || !galleryMobile) return;
+
+
+
     galleryImg.style.opacity = 0;
+
+
 
     setTimeout(()=>{
 
-        galleryImg.src = "images/gallery/" + file;
-        galleryMobile.srcset = "images/gallery/mobile/" + file;
 
-        galleryImg.style.opacity = 1;
+        galleryMobile.srcset = "";
+
+
+        requestAnimationFrame(()=>{
+
+
+            galleryMobile.srcset =
+            "images/gallery/mobile/" + file;
+
+
+            galleryImg.src =
+            "images/gallery/" + file;
+
+
+
+            galleryImg.onload = ()=>{
+
+                galleryImg.style.opacity = 1;
+
+            };
+
+
+        });
+
 
     },300);
 
+
 }
 
-if(galleryNext && galleryPrev && galleryImg && galleryMobile){
+
+
+
+// =========================
+// BUTTONS
+// =========================
+
+
+if(galleryNext){
+
 
     galleryNext.addEventListener("click",()=>{
 
+
         galleryIndex++;
 
+
         if(galleryIndex >= galleryImages.length){
+
             galleryIndex = 0;
+
         }
+
 
         changeGallery(galleryIndex);
 
+
     });
+
+
+}
+
+
+
+
+if(galleryPrev){
 
 
     galleryPrev.addEventListener("click",()=>{
 
+
         galleryIndex--;
 
+
         if(galleryIndex < 0){
+
             galleryIndex = galleryImages.length - 1;
+
         }
+
 
         changeGallery(galleryIndex);
 
-    });
-
-
-    document.addEventListener("keydown",(e)=>{
-
-        if(e.key === "ArrowRight"){
-
-            galleryIndex++;
-
-            if(galleryIndex >= galleryImages.length){
-                galleryIndex = 0;
-            }
-
-            changeGallery(galleryIndex);
-
-        }
-
-
-        if(e.key === "ArrowLeft"){
-
-            galleryIndex--;
-
-            if(galleryIndex < 0){
-                galleryIndex = galleryImages.length - 1;
-            }
-
-            changeGallery(galleryIndex);
-
-        }
 
     });
 
 
-    let touchStart = 0;
+}
+
+
+
+
+// =========================
+// KEYBOARD
+// =========================
+
+
+document.addEventListener("keydown",(e)=>{
+
+
+    if(e.key === "ArrowRight"){
+
+
+        galleryIndex++;
+
+
+        if(galleryIndex >= galleryImages.length){
+
+            galleryIndex = 0;
+
+        }
+
+
+        changeGallery(galleryIndex);
+
+
+    }
+
+
+
+    if(e.key === "ArrowLeft"){
+
+
+        galleryIndex--;
+
+
+        if(galleryIndex < 0){
+
+            galleryIndex = galleryImages.length - 1;
+
+        }
+
+
+        changeGallery(galleryIndex);
+
+
+    }
+
+
+});
+
+
+
+
+// =========================
+// SWIPE MOBILE
+// =========================
+
+
+let galleryTouchStart = 0;
+
+
+
+if(galleryImg){
 
 
     galleryImg.addEventListener("touchstart",(e)=>{
 
-        touchStart = e.changedTouches[0].screenX;
+
+        galleryTouchStart =
+        e.changedTouches[0].screenX;
+
 
     });
+
 
 
     galleryImg.addEventListener("touchend",(e)=>{
 
-        const touchEnd = e.changedTouches[0].screenX;
+
+        const galleryTouchEnd =
+        e.changedTouches[0].screenX;
 
 
-        if(touchStart - touchEnd > 50){
+
+        if(galleryTouchStart - galleryTouchEnd > 50){
+
 
             galleryIndex++;
 
+
             if(galleryIndex >= galleryImages.length){
+
                 galleryIndex = 0;
+
             }
 
+
             changeGallery(galleryIndex);
+
 
         }
 
 
-        if(touchEnd - touchStart > 50){
+
+        if(galleryTouchEnd - galleryTouchStart > 50){
+
 
             galleryIndex--;
 
+
             if(galleryIndex < 0){
+
                 galleryIndex = galleryImages.length - 1;
+
             }
+
 
             changeGallery(galleryIndex);
 
+
         }
 
+
     });
+
 
 }
 
