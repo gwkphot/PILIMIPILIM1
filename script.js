@@ -177,19 +177,13 @@ window.addEventListener("load", () => {
 });
 
 
-
-
-
-
-
 /* =========================
-SLOGAN
+CONTACT SLOGAN
 ПРИШЕЛ. УСЛЫШАЛ. ЗАПИЛИЛ.
 ========================= */
 
 
-gsap.from(".slogan-line .word", {
-
+gsap.from(".contact-block .slogan-line .word", {
 
     y:70,
 
@@ -204,18 +198,16 @@ gsap.from(".slogan-line .word", {
 
     scrollTrigger:{
 
-
-        trigger:".slogan-block",
+        trigger:".contact-block",
 
         start:"top 70%",
 
         once:true
 
-
     }
 
-
 });
+
 
 
 
@@ -651,13 +643,13 @@ gsap.to(".hero-letter",{
 });
 
 /* =========================
-WORKSHOPS + JAMS REVEAL
-KEEP LINE BREAKS
+UNIVERSAL TEXT REVEAL
+DESCRIPTION + WORKSHOPS + JAMS + MEETINGS + FINAL
 ========================= */
 
 
 document.querySelectorAll(
-    ".workshops-block p, .jams-block p"
+    ".description-block p, .workshops-block p, .jams-block p, .meetings-block p"
 ).forEach(block=>{
 
 
@@ -702,12 +694,10 @@ document.querySelectorAll(
                     document.createTextNode(word)
                 );
 
-
             }
 
 
         });
-
 
 
         node.replaceWith(fragment);
@@ -766,7 +756,6 @@ document.querySelectorAll(
 
 
 });
-
 /* =========================
 GALLERY
 ========================= */
