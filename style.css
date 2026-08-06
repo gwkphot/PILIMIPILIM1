@@ -1488,11 +1488,9 @@ CONTACT BLOCK
 
 
 
-
 /* =========================
 CONTACT BIG LOGO TOP
 ========================= */
-
 
 .contact-end-logo{
 
@@ -1508,20 +1506,17 @@ CONTACT BIG LOGO TOP
 
     font-size:clamp(55px,8.5vw,170px);
 
-    line-height:.8;
+    line-height:.85;
 
-    letter-spacing:-.075em;
+    letter-spacing:-.065em;
 
     color:#D9D9D9;
 
     white-space:nowrap;
 
-    overflow:hidden;
-
     transition:.35s ease;
 
 }
-
 
 
 .contact-end-logo:hover{
@@ -1530,6 +1525,25 @@ CONTACT BIG LOGO TOP
 
 }
 
+
+
+@media(max-width:768px){
+
+    .contact-end-logo{
+
+        font-size:clamp(45px,13vw,90px);
+
+        line-height:.9;
+
+        letter-spacing:-.055em;
+
+        padding:0 20px;
+
+        transform:translateY(25px);
+
+    }
+
+}
 
 
 
