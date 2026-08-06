@@ -1486,7 +1486,6 @@ CONTACT BLOCK
 }
 
 
-
 /* =========================
 CONTACT BIG LOGO TOP
 ========================= */
@@ -1530,24 +1529,11 @@ CONTACT BIG LOGO TOP
 
     .contact-end-logo{
 
-        width:100%;
-
-        margin-top:35px;
-
-        padding:0 20px;
-
-        font-size:clamp(42px,12vw,80px);
-
-        line-height:.9;
-
-        letter-spacing:-.06em;
-
-        white-space:normal;
+        display:none;
 
     }
 
 }
-
 
 
 /* =========================
