@@ -756,13 +756,13 @@ document.querySelectorAll(
 
 
 });
+
+
 /* =========================
 GALLERY
 ========================= */
 
-
 const galleryImages = [
-
     "1.jpg",
     "2.jpg",
     "3.jpg",
@@ -771,115 +771,133 @@ const galleryImages = [
     "6.jpg",
     "7.jpg",
     "8.jpg"
-
 ];
-
 
 let galleryIndex = 0;
 
-
-
 const galleryImg = document.getElementById("gallery-image");
-
 const galleryMobile = document.getElementById("gallery-mobile");
-
-
+const galleryNext = document.getElementById("gallery-next");
+const galleryPrev = document.getElementById("gallery-prev");
 
 function changeGallery(index){
 
+    const file = galleryImages[index];
 
     galleryImg.style.opacity = 0;
 
-
     setTimeout(()=>{
 
-
-        const file = galleryImages[index];
-
-
-        galleryImg.src =
-        "images/gallery/" + file;
-
-
-        galleryMobile.srcset =
-        "images/mobile/gallery/" + file;
-
+        galleryImg.src = "images/gallery/" + file;
+        galleryMobile.srcset = "images/mobile/gallery/" + file;
 
         galleryImg.style.opacity = 1;
 
-
     },300);
-
 
 }
 
+if(galleryNext && galleryPrev && galleryImg && galleryMobile){
+
+    galleryNext.addEventListener("click",()=>{
+
+        galleryIndex++;
+
+        if(galleryIndex >= galleryImages.length){
+            galleryIndex = 0;
+        }
+
+        changeGallery(galleryIndex);
+
+    });
 
 
+    galleryPrev.addEventListener("click",()=>{
+
+        galleryIndex--;
+
+        if(galleryIndex < 0){
+            galleryIndex = galleryImages.length - 1;
+        }
+
+        changeGallery(galleryIndex);
+
+    });
 
 
+    document.addEventListener("keydown",(e)=>{
+
+        if(e.key === "ArrowRight"){
+
+            galleryIndex++;
+
+            if(galleryIndex >= galleryImages.length){
+                galleryIndex = 0;
+            }
+
+            changeGallery(galleryIndex);
+
+        }
 
 
-/* =========================
-NEXT
-========================= */
+        if(e.key === "ArrowLeft"){
+
+            galleryIndex--;
+
+            if(galleryIndex < 0){
+                galleryIndex = galleryImages.length - 1;
+            }
+
+            changeGallery(galleryIndex);
+
+        }
+
+    });
 
 
-document
-.getElementById("gallery-next")
-.addEventListener("click",()=>{
+    let touchStart = 0;
 
 
-    galleryIndex++;
+    galleryImg.addEventListener("touchstart",(e)=>{
+
+        touchStart = e.changedTouches[0].screenX;
+
+    });
 
 
-    if(galleryIndex >= galleryImages.length){
+    galleryImg.addEventListener("touchend",(e)=>{
 
-        galleryIndex = 0;
-
-    }
+        const touchEnd = e.changedTouches[0].screenX;
 
 
-    changeGallery(galleryIndex);
+        if(touchStart - touchEnd > 50){
+
+            galleryIndex++;
+
+            if(galleryIndex >= galleryImages.length){
+                galleryIndex = 0;
+            }
+
+            changeGallery(galleryIndex);
+
+        }
 
 
-});
+        if(touchEnd - touchStart > 50){
 
+            galleryIndex--;
 
+            if(galleryIndex < 0){
+                galleryIndex = galleryImages.length - 1;
+            }
 
+            changeGallery(galleryIndex);
 
+        }
 
+    });
 
-
-/* =========================
-PREVIOUS
-========================= */
-
-
-document
-.getElementById("gallery-prev")
-.addEventListener("click",()=>{
-
-
-    galleryIndex--;
-
-
-    if(galleryIndex < 0){
-
-        galleryIndex = galleryImages.length - 1;
-
-    }
-
-
-    changeGallery(galleryIndex);
-
-
-});
-
-
-
-
-
-
+}
 
 /* =========================
 KEYBOARD
@@ -1010,4 +1028,3 @@ galleryImg.addEventListener("touchend",(e)=>{
 
 
 });
-
