@@ -789,7 +789,7 @@ function changeGallery(index){
     setTimeout(()=>{
 
         galleryImg.src = "images/gallery/" + file;
-        galleryMobile.srcset = "images/mobile/gallery/" + file;
+        galleryMobile.srcset = "images/gallery/mobile/" + file;
 
         galleryImg.style.opacity = 1;
 
