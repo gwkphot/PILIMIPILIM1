@@ -533,43 +533,59 @@ WORKSHOPS
 JAMS
 MEETINGS
 FINAL
+KEEP HTML
 ========================= */
 
 document.querySelectorAll(
 ".description-block p, .workshops-block p, .jams-block p, .meetings-block p, .final-text-block p"
 ).forEach(block=>{
 
-    const text = block.textContent.trim();
+    const walker = document.createTreeWalker(
+        block,
+        NodeFilter.SHOW_TEXT
+    );
 
-    block.innerHTML = "";
+    const textNodes = [];
 
-    text.split(" ").forEach((word,index,arr)=>{
+    while(walker.nextNode()){
+        textNodes.push(walker.currentNode);
+    }
 
-        const span = document.createElement("span");
+    textNodes.forEach(node=>{
 
-        span.className = "description-word";
+        const words = node.textContent.split(/(\s+)/);
 
-        span.textContent = word;
+        const fragment = document.createDocumentFragment();
 
-        span.style.display = "inline-block";
+        words.forEach(word=>{
 
-        block.appendChild(span);
+            if(word.trim()){
 
-        if(index !== arr.length-1){
+                const span = document.createElement("span");
 
-            block.appendChild(
-                document.createTextNode(" ")
-            );
+                span.className = "description-word";
 
-        }
+                span.textContent = word;
+
+                span.style.display = "inline-block";
+
+                fragment.appendChild(span);
+
+            }else{
+
+                fragment.appendChild(
+                    document.createTextNode(word)
+                );
+
+            }
+
+        });
+
+        node.replaceWith(fragment);
 
     });
 
-
-
     const words = block.querySelectorAll(".description-word");
-
-
 
     gsap.set(words,{
 
@@ -580,8 +596,6 @@ document.querySelectorAll(
         filter:"blur(2px)"
 
     });
-
-
 
     gsap.to(words,{
 
@@ -610,6 +624,7 @@ document.querySelectorAll(
     });
 
 });
+
 
 /* =========================
 GALLERY
