@@ -99,62 +99,188 @@ MANIFEST
 ========================= */
 
 .manifest-block{
+
     background:#d9d9d9;
 
     width:100%;
+
     min-height:100vh;
 
     padding:8px 16px 16px;
 
     display:flex;
+
     align-items:flex-start;
 
     box-sizing:border-box;
+
 }
 
+
+
 .manifest-content{
+
     width:100%;
+
     height:100%;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:flex-start;
+
 }
 
+
+
 .manifest-content h1{
+
     margin:0;
 
+    padding:0;
+
     font-family:'Inter',sans-serif;
+
     font-weight:600;
+
     font-size:clamp(64px,6.5vw,110px);
+
     line-height:.88;
+
     letter-spacing:-.065em;
 
     color:#333;
+
 }
 
+
+
 .manifest-content h1 .line{
+
     display:block;
+
     white-space:nowrap;
+
 }
+
 
 
 /* =========================
 TABLET
 ========================= */
 
-@media (max-width:1024px){
+@media(max-width:1024px){
+
 
     .manifest-block{
+
         padding:8px 14px 14px;
+
     }
 
+
     .manifest-content h1{
+
         font-size:clamp(50px,6vw,72px);
+
+    }
+
+
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .manifest-block{
+
+        min-height:auto;
+
+        padding:0 2px 20px;
+
+        display:flex;
+
+        align-items:flex-start;
+
+        justify-content:flex-start;
+
+    }
+
+
+    .manifest-content{
+
+        width:100%;
+
+        height:auto;
+
+        margin:0;
+
+        padding:0;
+
+        display:flex;
+
+        align-items:flex-start;
+
+        justify-content:flex-start;
+
+    }
+
+
+    .manifest-content h1{
+
+        width:100%;
+
+        margin:0;
+
+        padding:0;
+
+        font-size:clamp(46px,12vw,64px);
+
+        line-height:.86;
+
+        letter-spacing:-.07em;
+
+    }
+
+
+    .manifest-content h1 .line{
+
+        white-space:normal;
+
     }
 
 }
 
+
+
+/* =========================
+SMALL MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .manifest-block{
+
+        padding:0 0 18px;
+
+    }
+
+
+    .manifest-content h1{
+
+        font-size:42px;
+
+        line-height:.88;
+
+        letter-spacing:-.065em;
+
+    }
+
+}
 
 /* =========================
 IMAGE LAYERS
@@ -295,13 +421,9 @@ DESCRIPTION
 
 
 
-
-
-
 /* =========================
 CARDS
 ========================= */
-
 
 .card-block{
 
@@ -333,7 +455,6 @@ CARDS
 COLORS
 ========================= */
 
-
 .orange{
 
     background:#FF6716;
@@ -362,7 +483,6 @@ COLORS
 SYMBOLS
 ========================= */
 
-
 .symbol img{
 
     width:min(72vh,680px);
@@ -379,7 +499,6 @@ SYMBOLS
 TEXT
 ========================= */
 
-
 .text{
 
     background:#d9d9d9;
@@ -390,13 +509,19 @@ TEXT
 
     flex-direction:column;
 
-    justify-content:flex-start;
+    justify-content:space-between;
 
     align-items:flex-start;
+
+    box-sizing:border-box;
 
 }
 
 
+
+/* =========================
+TITLE
+========================= */
 
 .text h2{
 
@@ -412,13 +537,17 @@ TEXT
 
     color:#333333;
 
-    margin-bottom:auto;
+    margin:0;
 
     max-width:700px;
 
 }
 
 
+
+/* =========================
+TEXT DESCRIPTION
+========================= */
 
 .text p{
 
@@ -434,10 +563,11 @@ TEXT
 
     color:#333333;
 
+    margin:0;
+
     max-width:850px;
 
 }
-
 
 
 
@@ -445,32 +575,7 @@ TEXT
 TABLET
 ========================= */
 
-
 @media(max-width:1024px){
-
-
-    .manifest-block{
-
-        padding:50px;
-
-    }
-
-
-
-    .manifest-content h1{
-
-        font-size:48px;
-
-    }
-
-
-
-    .manifest-slogan{
-
-        font-size:48px;
-
-    }
-
 
 
     .text{
@@ -510,56 +615,11 @@ TABLET
 
 
 
-
 /* =========================
 MOBILE CARDS
 ========================= */
 
-
 @media(max-width:768px){
-
-
-
-    .hero-title{
-
-        font-size:72px;
-
-    }
-
-
-
-    .manifest-block{
-
-        padding:40px 24px;
-
-    }
-
-
-
-    .manifest-content h1{
-
-        font-size:38px;
-
-    }
-
-
-
-    .manifest-slogan{
-
-        font-size:34px;
-
-        gap:.15em;
-
-    }
-
-
-
-    .image-card img{
-
-        object-position:center;
-
-    }
-
 
 
     .card-block{
@@ -602,7 +662,11 @@ MOBILE CARDS
 
         order:2;
 
-        padding:28px 16px;
+        padding:18px 10px;
+
+        justify-content:space-between;
+
+        align-items:flex-start;
 
     }
 
@@ -612,7 +676,9 @@ MOBILE CARDS
 
         font-size:34px;
 
-        margin-bottom:24px;
+        line-height:.92;
+
+        letter-spacing:-.055em;
 
     }
 
@@ -622,17 +688,14 @@ MOBILE CARDS
 
         font-size:24px;
 
-        line-height:1.2;
+        line-height:1.15;
 
         letter-spacing:-.03em;
 
     }
 
 
-
 }
-
-
 
 
 
@@ -640,38 +703,12 @@ MOBILE CARDS
 SMALL MOBILE
 ========================= */
 
-
 @media(max-width:480px){
-
-
-
-    .hero-title{
-
-        font-size:56px;
-
-    }
-
-
-
-    .manifest-content h1{
-
-        font-size:32px;
-
-    }
-
-
-
-    .manifest-slogan{
-
-        font-size:28px;
-
-    }
-
 
 
     .text{
 
-        padding:22px 14px;
+        padding:14px 8px;
 
     }
 
@@ -689,11 +726,13 @@ SMALL MOBILE
 
         font-size:22px;
 
+        line-height:1.15;
+
     }
 
 
-
 }
+
 /* =========================
 FIXED LOGO
 ========================= */
@@ -936,69 +975,47 @@ TABLET
 MOBILE
 ========================= */
 
-/* =========================
-MOBILE WORKSHOPS
-========================= */
-
 @media (max-width:768px){
 
-.workshops-block{
+    .workshops-block{
+        padding:6px 10px 40px;
+        /* увеличенный нижний отступ */
+    }
 
-    padding:6px 10px 32px;
+    .workshops-block h2{
+        font-size:38px;
+        margin-bottom:24px;
+    }
 
-}
-
-
-.workshops-block h2{
-
-    font-size:32px;
-
-    line-height:.92;
-
-    margin-bottom:20px;
-
-}
-
-
-.workshops-block p{
-
-    font-size:20px;
-
-    line-height:1.12;
+    .workshops-block p{
+        font-size:24px;
+        line-height:1.14;
+    }
 
 }
-
-}
-
 
 
 /* =========================
-SMALL MOBILE WORKSHOPS
+SMALL MOBILE
 ========================= */
 
 @media (max-width:480px){
 
-.workshops-block{
+    .workshops-block{
+        padding:4px 8px 48px;
+        /* ещё больше воздуха снизу */
+    }
 
-    padding:4px 8px 36px;
+    .workshops-block h2{
+        font-size:34px;
+    }
 
-}
-
-
-.workshops-block h2{
-
-    font-size:30px;
-
-}
-
-
-.workshops-block p{
-
-    font-size:19px;
+    .workshops-block p{
+        font-size:22px;
+    }
 
 }
 
-}
 
 /* =========================
 ДЖЕМЫ
@@ -1074,66 +1091,45 @@ TABLET
 
 
 /* =========================
-MOBILE JAMS
+MOBILE
 ========================= */
 
 @media (max-width:768px){
 
-.jams-block{
+    .jams-block{
+        padding:6px 10px 60px;
+    }
 
-    padding:6px 10px 40px;
+    .jams-block h2{
+        font-size:42px;
+        margin-bottom:24px;
+    }
 
-}
-
-
-.jams-block h2{
-
-    font-size:34px;
-
-    line-height:.92;
-
-    margin-bottom:20px;
-
-}
-
-
-.jams-block p{
-
-    font-size:20px;
-
-    line-height:1.12;
+    .jams-block p{
+        font-size:24px;
+        line-height:1.15;
+    }
 
 }
-
-}
-
 
 
 /* =========================
-SMALL MOBILE JAMS
+SMALL MOBILE
 ========================= */
 
 @media (max-width:480px){
 
-.jams-block{
+    .jams-block{
+        padding:4px 8px 70px;
+    }
 
-    padding:4px 8px 45px;
+    .jams-block h2{
+        font-size:36px;
+    }
 
-}
-
-
-.jams-block h2{
-
-    font-size:30px;
-
-}
-
-
-.jams-block p{
-
-    font-size:19px;
-
-}
+    .jams-block p{
+        font-size:22px;
+    }
 
 }
 
