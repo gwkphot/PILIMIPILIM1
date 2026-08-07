@@ -319,43 +319,77 @@ IMAGE LAYERS
 
 
 
-
 /* =========================
 DESCRIPTION
 ========================= */
 
-
 .description-block{
+    width:100%;
+    min-height:100vh;
 
     background:#bdbdb8;
 
-    padding:70px 80px;
+    padding:8px 16px 16px;
 
     display:flex;
-
     align-items:flex-start;
 
+    box-sizing:border-box;
 }
-
-
 
 .description-block p{
+    margin:0;
+    width:100%;
+    max-width:none;
 
     font-family:'Inter',sans-serif;
-
     font-weight:500;
-
     font-size:clamp(30px,3vw,54px);
-
     line-height:1.05;
-
     letter-spacing:-.04em;
-
     color:#333;
+}
 
-    max-width:1600px;
+/* Планшеты */
+@media (max-width:1024px){
+
+    .description-block{
+        padding:8px 14px 14px;
+    }
+
+    .description-block p{
+        font-size:clamp(28px,4vw,44px);
+    }
 
 }
+
+/* Телефоны */
+@media (max-width:768px){
+
+    .description-block{
+        padding:6px 10px 10px;
+    }
+
+    .description-block p{
+        font-size:clamp(24px,8vw,36px);
+    }
+
+}
+
+/* Очень маленькие телефоны */
+@media (max-width:480px){
+
+    .description-block{
+        padding:4px 8px 8px;
+    }
+
+    .description-block p{
+        font-size:24px;
+        line-height:1.03;
+    }
+
+}
+
 
 /* =========================
 CARDS
