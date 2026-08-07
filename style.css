@@ -936,47 +936,69 @@ TABLET
 MOBILE
 ========================= */
 
+/* =========================
+MOBILE WORKSHOPS
+========================= */
+
 @media (max-width:768px){
 
-    .workshops-block{
-        padding:6px 10px 40px;
-        /* увеличенный нижний отступ */
-    }
+.workshops-block{
 
-    .workshops-block h2{
-        font-size:38px;
-        margin-bottom:24px;
-    }
-
-    .workshops-block p{
-        font-size:24px;
-        line-height:1.14;
-    }
+    padding:6px 10px 32px;
 
 }
 
 
+.workshops-block h2{
+
+    font-size:32px;
+
+    line-height:.92;
+
+    margin-bottom:20px;
+
+}
+
+
+.workshops-block p{
+
+    font-size:20px;
+
+    line-height:1.12;
+
+}
+
+}
+
+
+
 /* =========================
-SMALL MOBILE
+SMALL MOBILE WORKSHOPS
 ========================= */
 
 @media (max-width:480px){
 
-    .workshops-block{
-        padding:4px 8px 48px;
-        /* ещё больше воздуха снизу */
-    }
+.workshops-block{
 
-    .workshops-block h2{
-        font-size:34px;
-    }
-
-    .workshops-block p{
-        font-size:22px;
-    }
+    padding:4px 8px 36px;
 
 }
 
+
+.workshops-block h2{
+
+    font-size:30px;
+
+}
+
+
+.workshops-block p{
+
+    font-size:19px;
+
+}
+
+}
 
 /* =========================
 ДЖЕМЫ
@@ -1052,45 +1074,66 @@ TABLET
 
 
 /* =========================
-MOBILE
+MOBILE JAMS
 ========================= */
 
 @media (max-width:768px){
 
-    .jams-block{
-        padding:6px 10px 60px;
-    }
+.jams-block{
 
-    .jams-block h2{
-        font-size:42px;
-        margin-bottom:24px;
-    }
-
-    .jams-block p{
-        font-size:24px;
-        line-height:1.15;
-    }
+    padding:6px 10px 40px;
 
 }
 
 
+.jams-block h2{
+
+    font-size:34px;
+
+    line-height:.92;
+
+    margin-bottom:20px;
+
+}
+
+
+.jams-block p{
+
+    font-size:20px;
+
+    line-height:1.12;
+
+}
+
+}
+
+
+
 /* =========================
-SMALL MOBILE
+SMALL MOBILE JAMS
 ========================= */
 
 @media (max-width:480px){
 
-    .jams-block{
-        padding:4px 8px 70px;
-    }
+.jams-block{
 
-    .jams-block h2{
-        font-size:36px;
-    }
+    padding:4px 8px 45px;
 
-    .jams-block p{
-        font-size:22px;
-    }
+}
+
+
+.jams-block h2{
+
+    font-size:30px;
+
+}
+
+
+.jams-block p{
+
+    font-size:19px;
+
+}
 
 }
 
