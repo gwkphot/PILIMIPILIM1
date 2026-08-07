@@ -527,73 +527,47 @@ gsap.to(".hero-letter",{
 });
 
 /* =========================
-UNIVERSAL TEXT REVEAL
-DESCRIPTION + WORKSHOPS + JAMS + MEETINGS + FINAL
+TEXT REVEAL
+DESCRIPTION
+WORKSHOPS
+JAMS
+MEETINGS
+FINAL
 ========================= */
 
-
 document.querySelectorAll(
-    ".description-block p, .workshops-block p, .jams-block p, .meetings-block p"
+".description-block p, .workshops-block p, .jams-block p, .meetings-block p, .final-text-block p"
 ).forEach(block=>{
 
+    const text = block.textContent.trim();
 
-    const nodes = [...block.childNodes];
+    block.innerHTML = "";
 
+    text.split(" ").forEach((word,index,arr)=>{
 
-    nodes.forEach(node=>{
+        const span = document.createElement("span");
 
+        span.className = "description-word";
 
-        if(node.nodeType !== 3) return;
+        span.textContent = word;
 
+        span.style.display = "inline-block";
 
-        const words = node.textContent.split(/(\s+)/);
+        block.appendChild(span);
 
+        if(index !== arr.length-1){
 
-        const fragment = document.createDocumentFragment();
+            block.appendChild(
+                document.createTextNode(" ")
+            );
 
-
-        words.forEach(word=>{
-
-
-            if(word.trim()){
-
-
-                const span = document.createElement("span");
-
-
-                span.className = "description-word";
-
-
-                span.textContent = word;
-
-
-                fragment.appendChild(span);
-
-
-            }
-            else{
-
-
-                fragment.appendChild(
-                    document.createTextNode(word)
-                );
-
-            }
-
-
-        });
-
-
-        node.replaceWith(fragment);
-
+        }
 
     });
 
 
 
-    const words = block.querySelectorAll(
-        ".description-word"
-    );
+    const words = block.querySelectorAll(".description-word");
 
 
 
@@ -617,20 +591,17 @@ document.querySelectorAll(
 
         filter:"blur(0px)",
 
-        duration:.7,
+        duration:.75,
 
-        stagger:.018,
+        stagger:.025,
 
         ease:"power2.out",
 
-
         scrollTrigger:{
-
 
             trigger:block.closest(".stack-card"),
 
             start:"top 70%",
-
 
             once:true
 
@@ -638,9 +609,7 @@ document.querySelectorAll(
 
     });
 
-
 });
-
 
 /* =========================
 GALLERY
