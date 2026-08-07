@@ -98,193 +98,101 @@ HERO
 MANIFEST
 ========================= */
 
-
 .manifest-block{
-
     background:#d9d9d9;
 
-    padding:70px 80px;
+    width:100%;
+    min-height:100vh;
+
+    padding:8px 16px 16px;
 
     display:flex;
-
     align-items:flex-start;
 
+    box-sizing:border-box;
 }
 
-
-
 .manifest-content{
-
     width:100%;
-
     height:100%;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:flex-start;
-
 }
 
-
-
 .manifest-content h1{
+    margin:0;
 
     font-family:'Inter',sans-serif;
-
     font-weight:600;
-
     font-size:clamp(64px,6.5vw,110px);
-
     line-height:.88;
-
     letter-spacing:-.065em;
 
     color:#333;
-
-    margin:0;
-
 }
-
-
 
 .manifest-content h1 .line{
-
     display:block;
-
     white-space:nowrap;
-
 }
-
-
-
-
-
-/* =========================
-MOBILE
-========================= */
-
-
-@media(max-width:768px){
-
-
-    .manifest-block{
-
-        padding:45px 24px;
-
-    }
-
-
-
-    .manifest-content h1{
-
-        font-size:clamp(42px,11vw,64px);
-
-        line-height:.92;
-
-        letter-spacing:-.055em;
-
-    }
-
-
-
-    .manifest-content h1 .line{
-
-        white-space:normal;
-
-    }
-
-
-}
-
-
 
 
 /* =========================
 TABLET
 ========================= */
 
-
-@media(max-width:1024px){
-
+@media (max-width:1024px){
 
     .manifest-block{
-
-        padding:50px;
-
+        padding:8px 14px 14px;
     }
-
-
 
     .manifest-content h1{
-
-        font-size:56px;
-
+        font-size:clamp(50px,6vw,72px);
     }
 
-
 }
-
-
-
 
 
 /* =========================
 MOBILE
 ========================= */
 
-
-@media(max-width:768px){
-
+@media (max-width:768px){
 
     .manifest-block{
-
-        padding:40px 24px;
-
+        padding:6px 10px 10px;
     }
-
-
 
     .manifest-content h1{
-
         font-size:clamp(38px,10vw,52px);
-
-        line-height:.94;
-
+        line-height:.92;
         letter-spacing:-.055em;
-
     }
-
-
 
     .manifest-content h1 .line{
-
         white-space:normal;
-
     }
 
-
 }
-
-
-
 
 
 /* =========================
 SMALL MOBILE
 ========================= */
 
+@media (max-width:480px){
 
-@media(max-width:480px){
-
-
-    .manifest-content h1{
-
-        font-size:34px;
-
+    .manifest-block{
+        padding:4px 8px 8px;
     }
 
+    .manifest-content h1{
+        font-size:34px;
+        line-height:.94;
+    }
 
 }
 
@@ -315,10 +223,6 @@ IMAGE LAYERS
 }
 
 
-
-
-
-
 /* =========================
 DESCRIPTION
 ========================= */
@@ -333,12 +237,14 @@ DESCRIPTION
 
     display:flex;
     align-items:flex-start;
+    justify-content:flex-start;
 
     box-sizing:border-box;
 }
 
 .description-block p{
     margin:0;
+
     width:100%;
     max-width:none;
 
@@ -349,6 +255,8 @@ DESCRIPTION
     letter-spacing:-.04em;
     color:#333;
 }
+
+
 
 /* Планшеты */
 @media (max-width:1024px){
@@ -389,6 +297,10 @@ DESCRIPTION
     }
 
 }
+
+
+
+
 
 
 /* =========================
@@ -956,342 +868,326 @@ SLOGAN
 }
 
 
-
-
 /* =========================
 МАСТЕР-КЛАССЫ
 ========================= */
 
-
 .workshops-block{
+    width:100%;
+    min-height:100vh;
 
     background:#D9D9D9;
 
-    display:block;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
 
-    padding:80px 40px;
+    padding:8px 16px 16px;
 
+    box-sizing:border-box;
 }
-
-
-
 
 .workshops-block h2{
+    margin:0 0 36px;
 
-    font-family:'Inter', sans-serif;
-
+    font-family:'Inter',sans-serif;
     font-weight:600;
-
-    font-size:clamp(44px,3.8vw,68px);
-
+    font-size:clamp(50px,4.4vw,76px);
     line-height:.95;
-
     letter-spacing:-.055em;
 
-    margin:0 0 50px 0;
-
     color:#7182CB;
-
 }
-
-
-
 
 .workshops-block p{
-
-    font-family:'Inter', sans-serif;
-
-    font-weight:500;
-
-    font-size:clamp(26px,2.15vw,40px);
-
-    line-height:1.12;
-
-    letter-spacing:-.035em;
-
-    max-width:1800px;
-
     margin:0;
 
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:clamp(30px,2.4vw,44px);
+    line-height:1.1;
+    letter-spacing:-.035em;
+
+    width:100%;
+    max-width:none;
+
     color:#292929;
-
 }
-
-
-
 
 
 /* =========================
 TABLET
 ========================= */
 
-
-@media(max-width:1024px){
+@media (max-width:1024px){
 
     .workshops-block{
-
-        padding:60px 30px;
-
+        padding:8px 14px 20px;
     }
-
 
     .workshops-block h2{
-
-        margin-bottom:40px;
-
+        font-size:clamp(44px,5vw,60px);
+        margin-bottom:30px;
     }
 
-
     .workshops-block p{
-
-        max-width:100%;
-
+        font-size:clamp(26px,3vw,34px);
     }
 
 }
-
-
-
 
 
 /* =========================
 MOBILE
 ========================= */
 
-
-@media(max-width:768px){
+@media (max-width:768px){
 
     .workshops-block{
-
-        padding:45px 20px;
-
+        padding:6px 10px 40px;
+        /* увеличенный нижний отступ */
     }
-
 
     .workshops-block h2{
-
         font-size:38px;
-
-        margin-bottom:30px;
-
+        margin-bottom:24px;
     }
 
-
     .workshops-block p{
-
-        font-size:22px;
-
-        line-height:1.15;
-
+        font-size:24px;
+        line-height:1.14;
     }
 
 }
+
+
+/* =========================
+SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .workshops-block{
+        padding:4px 8px 48px;
+        /* ещё больше воздуха снизу */
+    }
+
+    .workshops-block h2{
+        font-size:34px;
+    }
+
+    .workshops-block p{
+        font-size:22px;
+    }
+
+}
+
+
 /* =========================
 ДЖЕМЫ
 ========================= */
 
-
 .jams-block{
-
     background:#D9D9D9;
 
-    display:block;
+    width:100%;
+    min-height:100vh;
 
-    padding:80px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
 
+    padding:8px 16px 16px;
+
+    box-sizing:border-box;
 }
-
-
-
 
 .jams-block h2{
-
     font-family:'Inter', sans-serif;
-
     font-weight:600;
 
-    font-size:clamp(44px,3.8vw,68px);
+    font-size:clamp(52px,4.5vw,78px);
 
     line-height:.95;
-
     letter-spacing:-.055em;
 
-    margin:0 0 50px 0;
+    margin:0 0 36px;
 
     color:#FF6716;
-
 }
 
-
-
-
 .jams-block p{
-
     font-family:'Inter', sans-serif;
-
     font-weight:500;
 
-    font-size:clamp(26px,2.15vw,40px);
+    font-size:clamp(30px,2.45vw,46px);
 
     line-height:1.12;
-
     letter-spacing:-.035em;
 
-    max-width:1800px;
+    width:100%;
+    max-width:none;
 
     margin:0;
 
     color:#292929;
-
 }
-
-
-
 
 
 /* =========================
 TABLET
 ========================= */
 
-
-@media(max-width:1024px){
+@media (max-width:1024px){
 
     .jams-block{
-
-        padding:60px 30px;
-
+        padding:8px 14px 20px;
     }
-
 
     .jams-block h2{
-
-        margin-bottom:40px;
-
+        font-size:clamp(46px,5vw,64px);
+        margin-bottom:30px;
     }
 
-
     .jams-block p{
-
-        max-width:100%;
-
+        font-size:clamp(28px,3.2vw,38px);
     }
 
 }
-
-
-
 
 
 /* =========================
 MOBILE
 ========================= */
 
-
-@media(max-width:768px){
+@media (max-width:768px){
 
     .jams-block{
-
-        padding:45px 20px;
-
+        padding:6px 10px 60px;
     }
-
 
     .jams-block h2{
-
-        font-size:38px;
-
-        margin-bottom:30px;
-
+        font-size:42px;
+        margin-bottom:24px;
     }
 
-
     .jams-block p{
-
-        font-size:22px;
-
+        font-size:24px;
         line-height:1.15;
-
     }
 
 }
+
+
+/* =========================
+SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .jams-block{
+        padding:4px 8px 70px;
+    }
+
+    .jams-block h2{
+        font-size:36px;
+    }
+
+    .jams-block p{
+        font-size:22px;
+    }
+
+}
+
 /* =========================
 РАСПИСАНИЕ
 ========================= */
 
-
 .meetings-block{
-
     background:#292929;
 
-    display:block;
+    width:100%;
+    min-height:100vh;
 
-    padding:80px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
 
+    padding:8px 16px 16px;
+
+    box-sizing:border-box;
 }
 
-
 .meetings-block p{
-
     font-family:'Inter', sans-serif;
-
     font-weight:500;
 
-    font-size:clamp(26px,2.15vw,40px);
+    /* немного увеличил */
+    font-size:clamp(30px,2.45vw,46px);
 
     line-height:1.12;
-
     letter-spacing:-.035em;
 
-    max-width:1800px;
+    width:100%;
+    max-width:none;
 
     margin:0;
 
     color:#D9D9D9;
-
 }
 
 
+/* =========================
+TABLET
+========================= */
 
-@media(max-width:1024px){
-
-    .meetings-block{
-
-        padding:60px 30px;
-
-    }
-
-}
-
-
-
-@media(max-width:768px){
+@media (max-width:1024px){
 
     .meetings-block{
-
-        padding:45px 20px;
-
+        padding:8px 14px 20px;
     }
-
-
-    .meetings-block h2{
-
-        font-size:38px;
-
-        margin-bottom:30px;
-
-    }
-
 
     .meetings-block p{
-
-        font-size:22px;
-
-        line-height:1.15;
-
+        font-size:clamp(28px,3.2vw,38px);
     }
 
 }
 
+
+/* =========================
+MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .meetings-block{
+        padding:6px 10px 60px;
+        /* запас снизу для комфортного скролла */
+    }
+
+    .meetings-block p{
+        font-size:24px;
+        line-height:1.15;
+    }
+
+}
+
+
+/* =========================
+SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .meetings-block{
+        padding:4px 8px 70px;
+    }
+
+    .meetings-block p{
+        font-size:22px;
+    }
+
+}
 
 /* =========================
 RESIDENT PHOTO
@@ -1496,12 +1392,9 @@ MOBILE
 
 }
 
-
-
 /* =========================
 CONTACT BLOCK
 ========================= */
-
 
 .contact-block{
 
@@ -1513,11 +1406,16 @@ CONTACT BLOCK
 
     flex-direction:column;
 
-    justify-content:flex-start;
+    min-height:100vh;
 
     padding:70px 80px;
 
+    box-sizing:border-box;
+
+    overflow:visible;
+
 }
+
 
 
 /* =========================
@@ -1530,7 +1428,11 @@ CONTACT BIG LOGO TOP
 
     text-align:center;
 
-    margin-top:60px;
+    margin:0;
+
+    padding:0;
+
+    transform:translateY(-0.08em);
 
     font-family:'Montserrat',sans-serif;
 
@@ -1538,7 +1440,7 @@ CONTACT BIG LOGO TOP
 
     font-size:clamp(55px,8.5vw,170px);
 
-    line-height:.85;
+    line-height:.75;
 
     letter-spacing:-.065em;
 
@@ -1551,6 +1453,7 @@ CONTACT BIG LOGO TOP
 }
 
 
+
 .contact-end-logo:hover{
 
     color:#98E915;
@@ -1559,21 +1462,9 @@ CONTACT BIG LOGO TOP
 
 
 
-@media(max-width:768px){
-
-    .contact-end-logo{
-
-        display:none;
-
-    }
-
-}
-
-
 /* =========================
 SLOGAN
 ========================= */
-
 
 .slogan-line{
 
@@ -1587,21 +1478,19 @@ SLOGAN
 
     gap:.28em;
 
+    margin-top:60px;
+
     font-family:'Inter',sans-serif;
 
     font-weight:700;
 
     font-size:clamp(28px,2.5vw,48px);
 
-    letter-spacing:-.055em;
-
     line-height:1;
 
+    letter-spacing:-.055em;
+
     white-space:nowrap;
-
-    margin-top:60px;
-
-    margin-bottom:auto;
 
 }
 
@@ -1617,26 +1506,15 @@ SLOGAN
 
 .slogan-line .green{
 
-    color:#98E915;
+    color:#7182CB;
 
 }
-
-
-
-.slogan-line .green{
-
-    color:#B9ED00;
-
-}
-
-
 
 
 
 /* =========================
 CONTACT BOTTOM
 ========================= */
-
 
 .contact-bottom{
 
@@ -1648,15 +1526,10 @@ CONTACT BOTTOM
 
     margin-top:auto;
 
+    background:#292929;
+
 }
 
-
-
-
-
-/* =========================
-CONTACT LEFT
-========================= */
 
 
 .contact-left{
@@ -1714,13 +1587,11 @@ CONTACT LEFT
 }
 
 
-
 .contact-socials a:nth-child(2):hover{
 
     color:#98E915;
 
 }
-
 
 
 .contact-socials a:nth-child(3):hover{
@@ -1731,12 +1602,9 @@ CONTACT LEFT
 
 
 
-
-
 /* =========================
 EMAIL
 ========================= */
-
 
 .contact-input{
 
@@ -1794,8 +1662,6 @@ EMAIL
 
     font-size:42px;
 
-    cursor:pointer;
-
 }
 
 
@@ -1810,12 +1676,9 @@ EMAIL
 
 
 
-
-
 /* =========================
 CONTACT RIGHT
 ========================= */
-
 
 .contact-right{
 
@@ -1855,60 +1718,35 @@ CONTACT RIGHT
 
 
 
-
-
 /* =========================
 TABLET
 ========================= */
 
-
 @media(max-width:1024px){
 
 
-    .contact-block{
+.contact-block{
 
-        padding:60px 50px;
-
-    }
-
-
-
-    .contact-end-logo{
-
-        font-size:clamp(55px,9vw,120px);
-
-    }
-
-
-
-    .slogan-line{
-
-        font-size:clamp(26px,3vw,42px);
-
-        margin-top:50px;
-
-    }
-
-
-
-    .contact-left{
-
-        width:45%;
-
-    }
-
-
-
-    .contact-right h2{
-
-        font-size:52px;
-
-    }
-
+    padding:60px 50px;
 
 }
 
 
+.contact-left{
+
+    width:45%;
+
+}
+
+
+.slogan-line{
+
+    font-size:clamp(26px,3vw,42px);
+
+}
+
+
+}
 
 
 
@@ -1916,130 +1754,216 @@ TABLET
 MOBILE
 ========================= */
 
-
 @media(max-width:768px){
 
 
-    .contact-block{
+.contact-block{
 
-        padding:40px 24px;
+    padding:0;
 
-    }
+    min-height:auto;
 
+    background:#292929;
 
+    display:flex;
 
-    .contact-end-logo{
+    flex-direction:column;
 
-        font-size:clamp(38px,10vw,70px);
-
-        line-height:.85;
-
-    }
-
-
-
-    .slogan-line{
-
-        font-size:clamp(22px,6vw,34px);
-
-        white-space:normal;
-
-        flex-wrap:wrap;
-
-        margin-top:40px;
-
-        margin-bottom:50px;
-
-        text-align:center;
-
-    }
-
-
-
-    .contact-bottom{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:50px;
-
-    }
-
-
-
-    .contact-left{
-
-        width:100%;
-
-    }
-
-
-
-    .contact-socials{
-
-        gap:12px;
-
-    }
-
-
-
-    .contact-socials a{
-
-        font-size:34px;
-
-    }
-
-
-
-    .contact-input{
-
-        max-width:100%;
-
-    }
-
-
-
-    .contact-input input{
-
-        font-size:20px;
-
-    }
-
-
-
-    .contact-right{
-
-        width:100%;
-
-        text-align:left;
-
-    }
-
-
-
-    .contact-right span{
-
-        font-size:18px;
-
-        margin-bottom:12px;
-
-    }
-
-
-
-    .contact-right h2{
-
-        font-size:46px;
-
-        line-height:.9;
-
-    }
-
+    overflow:visible;
 
 }
 
 
+
+/* LOGO */
+
+.contact-end-logo{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:18px 8px 0;
+
+    box-sizing:border-box;
+
+    transform:none;
+
+    font-size:clamp(36px,9.5vw,58px);
+
+    line-height:.8;
+
+    letter-spacing:-.065em;
+
+}
+
+
+
+/* SLOGAN */
+
+.slogan-line{
+
+    width:100%;
+
+    min-height:60svh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:0;
+
+    margin:0;
+
+    padding:40px 16px;
+
+    box-sizing:border-box;
+
+    font-size:clamp(26px,7vw,34px);
+
+    line-height:.88;
+
+    letter-spacing:-.055em;
+
+    white-space:normal;
+
+    text-align:center;
+
+}
+
+
+
+.slogan-line .word{
+
+    display:block;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+
+.slogan-line .green{
+
+    color:#7182CB;
+
+}
+
+
+
+/* CONTACTS */
+
+.contact-bottom{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:45px;
+
+    margin:0;
+
+    padding:70px 16px 80px;
+
+    background:#292929;
+
+    box-sizing:border-box;
+
+}
+
+
+
+.contact-left{
+
+    width:100%;
+
+    gap:28px;
+
+}
+
+
+
+.contact-socials{
+
+    gap:12px;
+
+}
+
+
+
+.contact-socials a{
+
+    font-size:32px;
+
+}
+
+
+
+.contact-input{
+
+    max-width:100%;
+
+}
+
+
+
+.contact-input input{
+
+    font-size:20px;
+
+}
+
+
+
+.contact-input button{
+
+    font-size:36px;
+
+}
+
+
+
+.contact-right{
+
+    width:100%;
+
+    text-align:left;
+
+}
+
+
+
+.contact-right span{
+
+    font-size:18px;
+
+}
+
+
+
+.contact-right h2{
+
+    font-size:42px;
+
+}
+
+
+
+}
 
 
 
@@ -2047,50 +1971,44 @@ MOBILE
 SMALL MOBILE
 ========================= */
 
-
 @media(max-width:480px){
 
 
-    .contact-block{
+.contact-end-logo{
 
-        padding:32px 16px;
+    font-size:34px;
 
-    }
-
-
-
-    .contact-end-logo{
-
-        font-size:42px;
-
-    }
+}
 
 
 
-    .slogan-line{
+.slogan-line{
 
-        font-size:24px;
+    min-height:55svh;
 
-    }
+    font-size:24px;
 
-
-
-    .contact-socials a{
-
-        font-size:30px;
-
-    }
+}
 
 
 
-    .contact-right h2{
+.contact-socials a{
 
-        font-size:40px;
+    font-size:30px;
 
-    }
+}
+
+
+
+.contact-right h2{
+
+    font-size:38px;
+
+}
 
 
 }
+
 /* =========================
 PICTURE RESPONSIVE IMAGES
 ========================= */
