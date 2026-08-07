@@ -157,47 +157,6 @@ TABLET
 
 
 /* =========================
-MOBILE
-========================= */
-
-@media (max-width:768px){
-
-    .manifest-block{
-        padding:6px 10px 10px;
-    }
-
-    .manifest-content h1{
-        font-size:clamp(38px,10vw,52px);
-        line-height:.92;
-        letter-spacing:-.055em;
-    }
-
-    .manifest-content h1 .line{
-        white-space:normal;
-    }
-
-}
-
-
-/* =========================
-SMALL MOBILE
-========================= */
-
-@media (max-width:480px){
-
-    .manifest-block{
-        padding:4px 8px 8px;
-    }
-
-    .manifest-content h1{
-        font-size:34px;
-        line-height:.94;
-    }
-
-}
-
-
-/* =========================
 IMAGE LAYERS
 ========================= */
 
@@ -219,6 +178,42 @@ IMAGE LAYERS
     object-fit:cover;
 
     display:block;
+
+}
+
+@media(max-width:768px){
+
+    .stack-card.image-card{
+
+        height:auto;
+
+        aspect-ratio:auto;
+
+    }
+
+
+    .stack-card.image-card picture{
+
+        display:block;
+
+        width:100%;
+
+        height:auto;
+
+    }
+
+
+    .stack-card.image-card img{
+
+        display:block;
+
+        width:100%;
+
+        height:auto;
+
+        object-fit:contain;
+
+    }
 
 }
 
