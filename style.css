@@ -482,8 +482,6 @@ DESCRIPTION
 
 }
 
-
-
 /* =========================
 CARDS
 ========================= */
@@ -499,6 +497,10 @@ CARDS
 }
 
 
+
+/* =========================
+HALF
+========================= */
 
 .half{
 
@@ -566,7 +568,7 @@ TEXT
 
     background:#d9d9d9;
 
-    padding:70px 40px;
+    padding:24px 28px 28px;
 
     display:flex;
 
@@ -606,6 +608,19 @@ TITLE
 
 }
 
+
+
+/* =========================
+TEXT PARAGRAPH
+========================= */
+
+.text p{
+
+    margin:0;
+
+    max-width:700px;
+
+}
 
 
 /* =========================
@@ -863,7 +878,50 @@ FIXED LOGO
 
 
 
+/* =========================
+   FIXED LOGO — GRAY STATE
+========================= */
 
+.logo-fixed.dark{
+    border-color:#D9D9D9;
+}
+
+.logo-fixed.dark img{
+    content:url("images/logo-gray.svg");
+}
+
+/* =========================
+   DARK LOGO — HOVER
+========================= */
+
+.logo-fixed.dark:hover{
+    background:#98E915;
+    border-color:#111;
+}
+
+.logo-fixed.dark:hover img{
+    content:url("images/logo.svg");
+    filter:none;
+}
+/* =========================
+   FIXED LOGO — MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .logo-fixed{
+        width:44px;
+        height:44px;
+        top:20px;
+        right:20px;
+    }
+
+    .logo-fixed img{
+        width:75%;
+        height:75%;
+    }
+
+}
 
 
 
@@ -970,46 +1028,69 @@ SLOGAN
 ========================= */
 
 .workshops-block{
+
     width:100%;
+
     min-height:100vh;
 
     background:#D9D9D9;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:flex-start;
 
     padding:8px 16px 16px;
 
     box-sizing:border-box;
+
 }
 
+
+
 .workshops-block h2{
-    margin:0 0 36px;
+
+    margin:0 0 24px;
 
     font-family:'Inter',sans-serif;
+
     font-weight:600;
+
     font-size:clamp(50px,4.4vw,76px);
+
     line-height:.95;
+
     letter-spacing:-.055em;
 
     color:#7182CB;
+
 }
 
+
+
 .workshops-block p{
+
     margin:0;
 
     font-family:'Inter',sans-serif;
+
     font-weight:500;
+
     font-size:clamp(30px,2.4vw,44px);
+
     line-height:1.1;
+
     letter-spacing:-.035em;
 
     width:100%;
+
     max-width:none;
 
     color:#292929;
+
 }
+
 
 
 /* =========================
@@ -1019,19 +1100,31 @@ TABLET
 @media (max-width:1024px){
 
     .workshops-block{
+
         padding:8px 14px 20px;
+
     }
+
+
 
     .workshops-block h2{
+
         font-size:clamp(44px,5vw,60px);
-        margin-bottom:30px;
+
+        margin-bottom:20px;
+
     }
 
+
+
     .workshops-block p{
+
         font-size:clamp(26px,3vw,34px);
+
     }
 
 }
+
 
 
 /* =========================
@@ -1041,21 +1134,33 @@ MOBILE
 @media (max-width:768px){
 
     .workshops-block{
+
         padding:6px 10px 40px;
-        /* увеличенный нижний отступ */
+
     }
+
+
 
     .workshops-block h2{
+
         font-size:38px;
-        margin-bottom:24px;
+
+        margin-bottom:16px;
+
     }
 
+
+
     .workshops-block p{
-        font-size:24px;
-        line-height:1.14;
+
+        font-size:21px;
+
+        line-height:1.12;
+
     }
 
 }
+
 
 
 /* =========================
@@ -1065,19 +1170,33 @@ SMALL MOBILE
 @media (max-width:480px){
 
     .workshops-block{
-        padding:4px 8px 48px;
-        /* ещё больше воздуха снизу */
+
+        padding:4px 8px 40px;
+
     }
+
+
 
     .workshops-block h2{
+
         font-size:34px;
+
+        margin-bottom:14px;
+
     }
 
+
+
     .workshops-block p{
-        font-size:22px;
+
+        font-size:19px;
+
+        line-height:1.1;
+
     }
 
 }
+
 
 
 /* =========================
@@ -1085,50 +1204,69 @@ SMALL MOBILE
 ========================= */
 
 .jams-block{
+
     background:#D9D9D9;
 
     width:100%;
+
     min-height:100vh;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:flex-start;
 
     padding:8px 16px 16px;
 
     box-sizing:border-box;
+
 }
 
+
+
 .jams-block h2{
+
     font-family:'Inter', sans-serif;
+
     font-weight:600;
 
     font-size:clamp(52px,4.5vw,78px);
 
     line-height:.95;
+
     letter-spacing:-.055em;
 
-    margin:0 0 36px;
+    margin:0 0 24px;
 
     color:#FF6716;
+
 }
 
+
+
 .jams-block p{
+
     font-family:'Inter', sans-serif;
+
     font-weight:500;
 
     font-size:clamp(30px,2.45vw,46px);
 
     line-height:1.12;
+
     letter-spacing:-.035em;
 
     width:100%;
+
     max-width:none;
 
     margin:0;
 
     color:#292929;
+
 }
+
 
 
 /* =========================
@@ -1138,19 +1276,31 @@ TABLET
 @media (max-width:1024px){
 
     .jams-block{
+
         padding:8px 14px 20px;
+
     }
+
+
 
     .jams-block h2{
+
         font-size:clamp(46px,5vw,64px);
-        margin-bottom:30px;
+
+        margin-bottom:20px;
+
     }
 
+
+
     .jams-block p{
+
         font-size:clamp(28px,3.2vw,38px);
+
     }
 
 }
+
 
 
 /* =========================
@@ -1160,20 +1310,33 @@ MOBILE
 @media (max-width:768px){
 
     .jams-block{
-        padding:6px 10px 60px;
+
+        padding:6px 10px 40px;
+
     }
+
+
 
     .jams-block h2{
+
         font-size:42px;
-        margin-bottom:24px;
+
+        margin-bottom:16px;
+
     }
 
+
+
     .jams-block p{
-        font-size:24px;
-        line-height:1.15;
+
+        font-size:21px;
+
+        line-height:1.12;
+
     }
 
 }
+
 
 
 /* =========================
@@ -1183,18 +1346,33 @@ SMALL MOBILE
 @media (max-width:480px){
 
     .jams-block{
-        padding:4px 8px 70px;
+
+        padding:4px 8px 40px;
+
     }
+
+
 
     .jams-block h2{
+
         font-size:36px;
+
+        margin-bottom:14px;
+
     }
 
+
+
     .jams-block p{
-        font-size:22px;
+
+        font-size:19px;
+
+        line-height:1.1;
+
     }
 
 }
+
 
 /* =========================
 РАСПИСАНИЕ
@@ -1684,11 +1862,13 @@ CONTACT BOTTOM
 }
 
 
+
 .contact-socials a:nth-child(2):hover{
 
     color:#98E915;
 
 }
+
 
 
 .contact-socials a:nth-child(3):hover{
@@ -1821,27 +2001,27 @@ TABLET
 
 @media(max-width:1024px){
 
+    .contact-block{
 
-.contact-block{
+        padding:60px 50px;
 
-    padding:60px 50px;
-
-}
-
-
-.contact-left{
-
-    width:45%;
-
-}
+    }
 
 
-.slogan-line{
 
-    font-size:clamp(26px,3vw,42px);
+    .contact-left{
 
-}
+        width:45%;
 
+    }
+
+
+
+    .slogan-line{
+
+        font-size:clamp(26px,3vw,42px);
+
+    }
 
 }
 
@@ -1853,212 +2033,215 @@ MOBILE
 
 @media(max-width:768px){
 
+    .contact-block{
 
-.contact-block{
+        padding:0;
 
-    padding:0;
+        min-height:100svh;
 
-    min-height:auto;
+        background:#292929;
 
-    background:#292929;
+        display:flex;
 
-    display:flex;
+        flex-direction:column;
 
-    flex-direction:column;
+        overflow:visible;
 
-    overflow:visible;
+    }
 
-}
 
 
+    /* =========================
+    BIG LOGO
+    ========================= */
 
-/* LOGO */
+    .contact-end-logo{
 
-.contact-end-logo{
+        width:100%;
 
-    width:100%;
+        display:flex;
 
-    display:flex;
+        justify-content:center;
 
-    justify-content:center;
+        align-items:flex-start;
 
-    align-items:flex-start;
+        padding:32px 8px 0;
 
-    padding:18px 8px 0;
+        box-sizing:border-box;
 
-    box-sizing:border-box;
+        transform:none;
 
-    transform:none;
+        font-size:clamp(38px,9.5vw,58px);
 
-    font-size:clamp(36px,9.5vw,58px);
+        line-height:.8;
 
-    line-height:.8;
+        letter-spacing:-.065em;
 
-    letter-spacing:-.065em;
+        will-change:transform,opacity;
 
-}
+    }
 
 
 
-/* SLOGAN */
+    /* =========================
+    SLOGAN
+    ========================= */
 
-.slogan-line{
+    .slogan-line{
 
-    width:100%;
+        width:100%;
 
-    min-height:60svh;
+        display:flex;
 
-    display:flex;
+        flex-direction:row;
 
-    flex-direction:column;
+        justify-content:center;
 
-    justify-content:center;
+        align-items:center;
 
-    align-items:center;
+        gap:.18em;
 
-    gap:0;
+        margin:0;
 
-    margin:0;
+        padding:95px 0 40px;
 
-    padding:40px 16px;
+        box-sizing:border-box;
 
-    box-sizing:border-box;
+        font-size:clamp(25px,7vw,34px);
 
-    font-size:clamp(26px,7vw,34px);
+        line-height:1;
 
-    line-height:.88;
+        letter-spacing:-.065em;
 
-    letter-spacing:-.055em;
+        white-space:nowrap;
 
-    white-space:normal;
+        text-align:center;
 
-    text-align:center;
+    }
 
-}
 
 
+    .slogan-line .word{
 
-.slogan-line .word{
+        display:inline-block;
 
-    display:block;
+        margin:0;
 
-    margin:0;
+        padding:0;
 
-    padding:0;
+    }
 
-}
 
 
+    .slogan-line .green{
 
-.slogan-line .green{
+        color:#7182CB;
 
-    color:#7182CB;
+    }
 
-}
 
 
+    /* =========================
+    CONTACTS — BOTTOM
+    ========================= */
 
-/* CONTACTS */
+    .contact-bottom{
 
-.contact-bottom{
+        width:100%;
 
-    width:100%;
+        display:flex;
 
-    display:flex;
+        flex-direction:column;
 
-    flex-direction:column;
+        align-items:flex-start;
 
-    align-items:flex-start;
+        gap:35px;
 
-    gap:45px;
+        margin-top:auto;
 
-    margin:0;
+        padding:0 16px 24px;
 
-    padding:70px 16px 80px;
+        background:#292929;
 
-    background:#292929;
+        box-sizing:border-box;
 
-    box-sizing:border-box;
+    }
 
-}
 
 
+    .contact-left{
 
-.contact-left{
+        width:100%;
 
-    width:100%;
+        gap:28px;
 
-    gap:28px;
+    }
 
-}
 
 
+    .contact-socials{
 
-.contact-socials{
+        gap:12px;
 
-    gap:12px;
+    }
 
-}
 
 
+    .contact-socials a{
 
-.contact-socials a{
+        font-size:32px;
 
-    font-size:32px;
+    }
 
-}
 
 
+    .contact-input{
 
-.contact-input{
+        max-width:100%;
 
-    max-width:100%;
+    }
 
-}
 
 
+    .contact-input input{
 
-.contact-input input{
+        font-size:20px;
 
-    font-size:20px;
+    }
 
-}
 
 
+    .contact-input button{
 
-.contact-input button{
+        font-size:36px;
 
-    font-size:36px;
+    }
 
-}
 
 
+    .contact-right{
 
-.contact-right{
+        width:100%;
 
-    width:100%;
+        text-align:left;
 
-    text-align:left;
+    }
 
-}
 
 
+    .contact-right span{
 
-.contact-right span{
+        font-size:18px;
 
-    font-size:18px;
+    }
 
-}
 
 
+    .contact-right h2{
 
-.contact-right h2{
+        font-size:42px;
 
-    font-size:42px;
-
-}
-
-
+    }
 
 }
 
@@ -2070,46 +2253,64 @@ SMALL MOBILE
 
 @media(max-width:480px){
 
+    .contact-end-logo{
 
-.contact-end-logo{
+        font-size:34px;
 
-    font-size:34px;
-
-}
-
-
-
-.slogan-line{
-
-    min-height:55svh;
-
-    font-size:24px;
-
-}
+    }
 
 
 
-.contact-socials a{
+    .slogan-line{
 
-    font-size:30px;
+        font-size:clamp(22px,6.5vw,28px);
 
-}
+        gap:.14em;
+
+        padding-top:90px;
+
+        letter-spacing:-.07em;
+
+    }
 
 
 
-.contact-right h2{
+    .contact-socials a{
 
-    font-size:38px;
+        font-size:30px;
 
-}
+    }
 
+
+
+    .contact-right h2{
+
+        font-size:38px;
+
+    }
 
 }
 
 /* =========================
-PICTURE RESPONSIVE IMAGES
+MOBILE CONTACT LOGO POSITION
 ========================= */
 
+@media(max-width:768px){
+
+    .logo-fixed.mobile-contact-position{
+
+        top:auto;
+
+        bottom:20px;
+
+    }
+
+}
+
+
+/* =========================
+PICTURE RESPONSIVE IMAGES
+========================= */
 
 .image-card picture{
 
@@ -2134,3 +2335,4 @@ PICTURE RESPONSIVE IMAGES
     display:block;
 
 }
+
