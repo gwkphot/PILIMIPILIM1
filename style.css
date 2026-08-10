@@ -924,6 +924,22 @@ FIXED LOGO
 }
 
 
+/* =========================
+MOBILE CONTACT LOGO POSITION
+========================= */
+
+@media(max-width:768px){
+
+    .logo-fixed.mobile-contact-position{
+
+        top:auto;
+
+        bottom:20px;
+
+    }
+
+}
+
 
 /* =========================
 LETTER ANIMATION
