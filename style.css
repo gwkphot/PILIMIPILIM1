@@ -1488,10 +1488,10 @@ RESIDENT PHOTO
 
 
 
+
 /* =========================
 GALLERY
 ========================= */
-
 
 .gallery-card{
 
@@ -1500,6 +1500,10 @@ GALLERY
 }
 
 
+
+/* =========================
+GALLERY CONTAINER
+========================= */
 
 .gallery-container{
 
@@ -1541,12 +1545,9 @@ GALLERY
 
 
 
-
-
 /* =========================
 GALLERY UI
 ========================= */
-
 
 .gallery-ui{
 
@@ -1621,20 +1622,92 @@ GALLERY UI
 }
 
 
+
 /* =========================
 MOBILE
 ========================= */
 
-
 @media(max-width:768px){
 
+    .gallery-card{
+
+        width:100%;
+
+        aspect-ratio:1 / 1;
+
+        min-height:0;
+
+        height:auto;
+
+    }
+
+
+
+    .gallery-container{
+
+        width:100%;
+
+        height:100%;
+
+        aspect-ratio:1 / 1;
+
+        position:relative;
+
+        overflow:hidden;
+
+    }
+
+
+
+    .gallery-container picture{
+
+        display:block;
+
+        width:100%;
+
+        height:100%;
+
+    }
+
+
+
+    .gallery-container img{
+
+        width:100%;
+
+        height:100%;
+
+        object-fit:cover;
+
+        display:block;
+
+    }
+
+
+
+    /* =========================
+    GALLERY UI
+    ========================= */
 
     .gallery-ui{
 
-        bottom:25px;
+        position:absolute;
 
-        width:92vw;
- padding:0 20px;
+        inset:0;
+
+        width:100%;
+
+        height:100%;
+
+        padding:0 20px;
+
+        box-sizing:border-box;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:space-between;
 
     }
 
@@ -1663,7 +1736,6 @@ MOBILE
         font-size:15px;
 
     }
-
 
 }
 
