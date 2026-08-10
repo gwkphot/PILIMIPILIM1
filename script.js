@@ -758,242 +758,232 @@ if(galleryPrev){
 
 
 }
+/* =========================
+CONTACT BLOCK
+========================= */
 
 
 /* =========================
-   FIXED LOGO — GREEN STATE
+CONTACT SLOGAN
+ПРИШЕЛ. УСЛЫШАЛ. ЗАПИЛИЛ.
 ========================= */
 
-const fixedLogo = document.querySelector(".logo-fixed");
+gsap.from(
+    ".contact-block .slogan-line .word",
+    {
 
-function updateFixedLogo(){
+        y:70,
 
-    if(!fixedLogo) return;
+        opacity:0,
+
+        duration:.9,
+
+        stagger:.25,
+
+        ease:"power4.out",
+
+        scrollTrigger:{
+
+            trigger:".contact-block",
+
+            start:"top 70%",
+
+            once:true
+
+        }
+
+    }
+);
 
 
-    /* 
-       Берём точку в центре логотипа.
-       elementsFromPoint() возвращает все элементы
-       под этой точкой в порядке их реального z-index.
-    */
 
-    const logoRect = fixedLogo.getBoundingClientRect();
+/* =========================
+MOBILE CONTACT
+ПИЛИМ И ПИЛИМ — HIDE
+========================= */
 
-    const x = logoRect.left + logoRect.width / 2;
-    const y = logoRect.top + logoRect.height / 2;
+function initMobileContactLogoHide(){
+
+    if(
+        !window.matchMedia(
+            "(max-width:768px)"
+        ).matches
+    ){
+
+        return;
+
+    }
 
 
-    const elements = document.elementsFromPoint(x, y);
+    const contactBlock =
+        document.querySelector(
+            ".contact-block"
+        );
+
+
+    const contactLogo =
+        document.querySelector(
+            ".contact-end-logo"
+        );
+
+
+    if(
+        !contactBlock ||
+        !contactLogo
+    ){
+
+        return;
+
+    }
+
+
+    gsap.fromTo(
+
+        contactLogo,
+
+        {
+
+            y:0,
+
+            opacity:1
+
+        },
+
+        {
+
+            y:-120,
+
+            opacity:0,
+
+            ease:"none",
+
+            scrollTrigger:{
+
+                trigger:
+                    contactBlock,
+
+                start:
+                    "top top",
+
+                end:
+                    "top -35%",
+
+                scrub:true
+
+            }
+
+        }
+
+    );
+
+}
+
+
+initMobileContactLogoHide();
+
+
+
+/* =========================
+MOBILE FIXED LOGO
+CONTACT POSITION
+========================= */
+
+const fixedLogo =
+    document.querySelector(
+        ".logo-fixed"
+    );
+
+
+const contactBlock =
+    document.querySelector(
+        ".contact-block"
+    );
+
+
+function updateMobileContactLogo(){
+
+    if(
+        !fixedLogo ||
+        !contactBlock
+    ){
+
+        return;
+
+    }
 
 
     /*
-       Находим первый stack-card,
-       который реально находится сверху.
+
+    Десктоп:
+
+    логотип остаётся
+    в обычной позиции.
+
     */
 
-    const activeCard = elements
-        .map(element => element.closest(".stack-card"))
-        .find(card => card);
+    if(
+        !window.matchMedia(
+            "(max-width:768px)"
+        ).matches
+    ){
 
+        fixedLogo.classList.remove(
+            "mobile-contact-position"
+        );
 
-    let isDark = false;
-
-
-    if(activeCard){
-
-        /*
-           IMAGE 02
-        */
-
-        if(
-            activeCard.classList.contains("image-card") &&
-            activeCard.querySelector(
-                'img[src*="/02.jpg"]'
-            )
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           IMAGE 03
-        */
-
-        else if(
-            activeCard.classList.contains("image-card") &&
-            activeCard.querySelector(
-                'img[src*="/03.jpg"]'
-            )
-        ){
-            isDark = true;
-        }
-
-
-        /*
-
- IMAGE 05
-        */
-
-        else if(
-            activeCard.classList.contains("image-card") &&
-            activeCard.querySelector(
-                'img[src*="/05.jpg"]'
-            )
-        ){
-            isDark = true;
-        }
-
-
-        /*
-
-           IMAGE 06
-        */
-
-        else if(
-            activeCard.classList.contains("image-card") &&
-            activeCard.querySelector(
-                'img[src*="/06.jpg"]'
-            )
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           IMAGE 07
-        */
-
-        else if(
-            activeCard.classList.contains("image-card") &&
-            activeCard.querySelector(
-                'img[src*="/07.jpg"]'
-            )
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           GALLERY
-        */
-
-        else if(
-            activeCard.classList.contains("gallery-card")
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           MEETINGS
-        */
-
-        else if(
-            activeCard.classList.contains("meetings-block")
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           CONTACT
-        */
-
-        else if(
-            activeCard.classList.contains("contact-block")
-        ){
-            isDark = true;
-        }
-
-
-        /*
-           SLOGAN
-           Если slogan-line находится внутри contact-block,
-           contact-block уже обработан выше.
-        */
-
-        else if(
-            activeCard.querySelector(".slogan-line")
-        ){
-            isDark = true;
-        }
+        return;
 
     }
+
+
+    const rect =
+        contactBlock.getBoundingClientRect();
+
+
+    /*
+
+    Контактный блок находится
+    в пределах экрана.
+
+    */
+
+    const isInsideContact =
+
+        rect.top <=
+        window.innerHeight &&
+
+        rect.bottom >= 0;
 
 
     fixedLogo.classList.toggle(
-        "dark",
-        isDark
+
+        "mobile-contact-position",
+
+        isInsideContact
+
     );
 
 }
 
 
 window.addEventListener(
+
     "scroll",
-    updateFixedLogo
+
+    updateMobileContactLogo,
+
+    {passive:true}
+
 );
 
 
 window.addEventListener(
+
     "resize",
-    updateFixedLogo
+
+    updateMobileContactLogo
+
 );
 
 
-window.addEventListener(
-    "load",
-    updateFixedLogo
-);
-
-
-updateFixedLogo();
-
-
-/* =========================
- MOBILE CONTACT LOGO POSITION
- ========================= */
-
-if(window.matchMedia("(max-width:768px)").matches){
-
-    const contactBlock =
-        document.querySelector(".contact-block");
-
-
-    function updateMobileContactLogo(){
-
-        if(!fixedLogo || !contactBlock) return;
-
-
-        const contactRect =
-            contactBlock.getBoundingClientRect();
-
-
-        const isInsideContact =
-            contactRect.top < window.innerHeight &&
-            contactRect.bottom > 0;
-
-
-        fixedLogo.classList.toggle(
-            "mobile-contact-position",
-            isInsideContact
-        );
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateMobileContactLogo
-    );
-
-
-    window.addEventListener(
-        "resize",
-        updateMobileContactLogo
-    );
-
-
-    updateMobileContactLogo();
-
-}
+updateMobileContactLogo();
