@@ -1987,6 +1987,8 @@ EMAIL
 
     flex:1;
 
+    min-width:0;
+
     background:none;
 
     border:none;
@@ -2016,6 +2018,8 @@ EMAIL
 .contact-input button{
 
     width:50px;
+
+    flex-shrink:0;
 
     background:none;
 
@@ -2140,7 +2144,7 @@ MOBILE
 
 
     /* =========================
-    BIG LOGO
+    CONTACT BIG LOGO
     ========================= */
 
     .contact-end-logo{
@@ -2230,7 +2234,7 @@ MOBILE
 
 
     /* =========================
-    CONTACTS — BOTTOM
+    CONTACTS
     ========================= */
 
     .contact-bottom{
@@ -2283,15 +2287,25 @@ MOBILE
 
 
 
+    /* =========================
+    MOBILE EMAIL
+    ========================= */
+
     .contact-input{
 
-        max-width:100%;
+        width:calc(100% - 70px);
+
+        max-width:none;
 
     }
 
 
 
     .contact-input input{
+
+        min-width:0;
+
+        width:100%;
 
         font-size:20px;
 
@@ -2301,11 +2315,19 @@ MOBILE
 
     .contact-input button{
 
+        width:42px;
+
+        flex-shrink:0;
+
         font-size:36px;
 
     }
 
 
+
+    /* =========================
+    CONTACT RIGHT
+    ========================= */
 
     .contact-right{
 
@@ -2328,6 +2350,48 @@ MOBILE
     .contact-right h2{
 
         font-size:42px;
+
+    }
+
+
+
+    /* =========================
+    FIXED LOGO — MOBILE
+    ========================= */
+
+    .logo-fixed{
+
+        width:46px;
+
+        height:46px;
+
+        top:24px;
+
+        right:16px;
+
+    }
+
+
+
+    .logo-fixed img{
+
+        width:72%;
+
+        height:72%;
+
+    }
+
+
+
+    /* =========================
+    FIXED LOGO — CONTACT
+    ========================= */
+
+    .logo-fixed.mobile-contact-position{
+
+        top:auto !important;
+
+        bottom:20px;
 
     }
 
@@ -2377,25 +2441,43 @@ SMALL MOBILE
 
     }
 
-}
 
-/* =========================
-MOBILE CONTACT LOGO POSITION
-========================= */
 
-@media(max-width:768px){
+    /* EMAIL */
+
+    .contact-input{
+
+        width:calc(100% - 60px);
+
+    }
+
+
+
+    /* FIXED LOGO */
+
+    .logo-fixed{
+
+        width:42px;
+
+        height:42px;
+
+        top:20px;
+
+        right:14px;
+
+    }
+
+
 
     .logo-fixed.mobile-contact-position{
 
-        top:auto;
+        top:auto !important;
 
-        bottom:20px;
+        bottom:16px;
 
     }
 
 }
-
-
 /* =========================
 PICTURE RESPONSIVE IMAGES
 ========================= */
