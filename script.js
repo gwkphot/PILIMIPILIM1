@@ -24,7 +24,6 @@ gsap.from(".hero-title", {
 
 
 
-
 /* =========================
 MANIFEST TITLE
 RESIDENCE SOFT WORD REVEAL
@@ -761,261 +760,240 @@ if(galleryPrev){
 }
 
 
+/* =========================
+   FIXED LOGO — GREEN STATE
+========================= */
+
+const fixedLogo = document.querySelector(".logo-fixed");
+
+function updateFixedLogo(){
+
+    if(!fixedLogo) return;
 
 
-// =========================
-// KEYBOARD
-// =========================
+    /* 
+       Берём точку в центре логотипа.
+       elementsFromPoint() возвращает все элементы
+       под этой точкой в порядке их реального z-index.
+    */
+
+    const logoRect = fixedLogo.getBoundingClientRect();
+
+    const x = logoRect.left + logoRect.width / 2;
+    const y = logoRect.top + logoRect.height / 2;
 
 
-document.addEventListener("keydown",(e)=>{
+    const elements = document.elementsFromPoint(x, y);
 
 
-    if(e.key === "ArrowRight"){
+    /*
+       Находим первый stack-card,
+       который реально находится сверху.
+    */
+
+    const activeCard = elements
+        .map(element => element.closest(".stack-card"))
+        .find(card => card);
 
 
-        galleryIndex++;
+    let isDark = false;
 
 
-        if(galleryIndex >= galleryImages.length){
+    if(activeCard){
 
-            galleryIndex = 0;
+        /*
+           IMAGE 02
+        */
 
+        if(
+            activeCard.classList.contains("image-card") &&
+            activeCard.querySelector(
+                'img[src*="/02.jpg"]'
+            )
+        ){
+            isDark = true;
         }
 
 
-        changeGallery(galleryIndex);
+        /*
+           IMAGE 03
+        */
 
+        else if(
+            activeCard.classList.contains("image-card") &&
+            activeCard.querySelector(
+                'img[src*="/03.jpg"]'
+            )
+        ){
+            isDark = true;
+        }
+
+
+        /*
+
+ IMAGE 05
+        */
+
+        else if(
+            activeCard.classList.contains("image-card") &&
+            activeCard.querySelector(
+                'img[src*="/05.jpg"]'
+            )
+        ){
+            isDark = true;
+        }
+
+
+        /*
+
+           IMAGE 06
+        */
+
+        else if(
+            activeCard.classList.contains("image-card") &&
+            activeCard.querySelector(
+                'img[src*="/06.jpg"]'
+            )
+        ){
+            isDark = true;
+        }
+
+
+        /*
+           IMAGE 07
+        */
+
+        else if(
+            activeCard.classList.contains("image-card") &&
+            activeCard.querySelector(
+                'img[src*="/07.jpg"]'
+            )
+        ){
+            isDark = true;
+        }
+
+
+        /*
+           GALLERY
+        */
+
+        else if(
+            activeCard.classList.contains("gallery-card")
+        ){
+            isDark = true;
+        }
+
+
+        /*
+           MEETINGS
+        */
+
+        else if(
+            activeCard.classList.contains("meetings-block")
+        ){
+            isDark = true;
+        }
+
+
+        /*
+           CONTACT
+        */
+
+        else if(
+            activeCard.classList.contains("contact-block")
+        ){
+            isDark = true;
+        }
+
+
+        /*
+           SLOGAN
+           Если slogan-line находится внутри contact-block,
+           contact-block уже обработан выше.
+        */
+
+        else if(
+            activeCard.querySelector(".slogan-line")
+        ){
+            isDark = true;
+        }
 
     }
 
 
-
-    if(e.key === "ArrowLeft"){
-
-
-        galleryIndex--;
-
-
-        if(galleryIndex < 0){
-
-            galleryIndex = galleryImages.length - 1;
-
-        }
-
-
-        changeGallery(galleryIndex);
-
-
-    }
-
-
-});
-
-
-
-
-// =========================
-// SWIPE MOBILE
-// =========================
-
-
-let galleryTouchStart = 0;
-
-
-
-if(galleryImg){
-
-
-    galleryImg.addEventListener("touchstart",(e)=>{
-
-
-        galleryTouchStart =
-        e.changedTouches[0].screenX;
-
-
-    });
-
-
-
-    galleryImg.addEventListener("touchend",(e)=>{
-
-
-        const galleryTouchEnd =
-        e.changedTouches[0].screenX;
-
-
-
-        if(galleryTouchStart - galleryTouchEnd > 50){
-
-
-            galleryIndex++;
-
-
-            if(galleryIndex >= galleryImages.length){
-
-                galleryIndex = 0;
-
-            }
-
-
-            changeGallery(galleryIndex);
-
-
-        }
-
-
-
-        if(galleryTouchEnd - galleryTouchStart > 50){
-
-
-            galleryIndex--;
-
-
-            if(galleryIndex < 0){
-
-                galleryIndex = galleryImages.length - 1;
-
-            }
-
-
-            changeGallery(galleryIndex);
-
-
-        }
-
-
-    });
-
+    fixedLogo.classList.toggle(
+        "dark",
+        isDark
+    );
 
 }
 
-/* =========================
-KEYBOARD
-========================= */
+
+window.addEventListener(
+    "scroll",
+    updateFixedLogo
+);
 
 
-document.addEventListener("keydown",(e)=>{
+window.addEventListener(
+    "resize",
+    updateFixedLogo
+);
 
 
-    if(e.key === "ArrowRight"){
+window.addEventListener(
+    "load",
+    updateFixedLogo
+);
 
 
-        galleryIndex++;
-
-
-        if(galleryIndex >= galleryImages.length){
-
-            galleryIndex = 0;
-
-        }
-
-
-        changeGallery(galleryIndex);
-
-
-    }
-
-
-
-
-    if(e.key === "ArrowLeft"){
-
-
-        galleryIndex--;
-
-
-        if(galleryIndex < 0){
-
-            galleryIndex = galleryImages.length - 1;
-
-        }
-
-
-        changeGallery(galleryIndex);
-
-
-    }
-
-
-});
-
-
-
-
-
+updateFixedLogo();
 
 
 /* =========================
-SWIPE MOBILE
-========================= */
+ MOBILE CONTACT LOGO POSITION
+ ========================= */
+
+if(window.matchMedia("(max-width:768px)").matches){
+
+    const contactBlock =
+        document.querySelector(".contact-block");
 
 
-let touchStart = 0;
+    function updateMobileContactLogo(){
+
+        if(!fixedLogo || !contactBlock) return;
 
 
-
-galleryImg.addEventListener("touchstart",(e)=>{
-
-
-    touchStart =
-    e.changedTouches[0].screenX;
+        const contactRect =
+            contactBlock.getBoundingClientRect();
 
 
-});
+        const isInsideContact =
+            contactRect.top < window.innerHeight &&
+            contactRect.bottom > 0;
 
 
-
-
-
-galleryImg.addEventListener("touchend",(e)=>{
-
-
-    let touchEnd =
-    e.changedTouches[0].screenX;
-
-
-
-
-    if(touchStart - touchEnd > 50){
-
-
-        galleryIndex++;
-
-
-        if(galleryIndex >= galleryImages.length){
-
-            galleryIndex = 0;
-
-        }
-
-
-        changeGallery(galleryIndex);
-
+        fixedLogo.classList.toggle(
+            "mobile-contact-position",
+            isInsideContact
+        );
 
     }
 
 
+    window.addEventListener(
+        "scroll",
+        updateMobileContactLogo
+    );
 
 
-
-    if(touchEnd - touchStart > 50){
-
-
-        galleryIndex--;
-
-
-        if(galleryIndex < 0){
-
-            galleryIndex = galleryImages.length - 1;
-
-        }
+    window.addEventListener(
+        "resize",
+        updateMobileContactLogo
+    );
 
 
-        changeGallery(galleryIndex);
+    updateMobileContactLogo();
 
-
-    }
-
-
-});
+}
