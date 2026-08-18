@@ -1,465 +1,346 @@
+/* =========================================================
+PILIM И PILIM
+LOCAL FONT SYSTEM
+========================================================= */
+
+/* =========================================================
+LOCAL FONTS
+========================================================= */
+
+@font-face{
+    font-family:'Inter';
+    src:url('fonts/Inter-Medium.ttf') format('truetype');
+    font-weight:500;
+    font-style:normal;
+    font-display:swap;
+}
+
+@font-face{
+    font-family:'Inter';
+    src:url('fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+}
+
+@font-face{
+    font-family:'Inter';
+    src:url('fonts/Inter-Bold.ttf') format('truetype');
+    font-weight:700;
+    font-style:normal;
+    font-display:swap;
+}
+
+@font-face{
+    font-family:'Montserrat';
+    src:url('fonts/Montserrat-ExtraBold.ttf') format('truetype');
+    font-weight:800;
+    font-style:normal;
+    font-display:swap;
+}
+
+
+/* =========================================================
+RESET
+========================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-
 html{
     scroll-behavior:smooth;
 }
 
-
 body{
-
     background:#d9d9d9;
-
+    text-rendering:optimizeLegibility;
     font-family:'Inter',sans-serif;
-
+    font-weight:500;
     color:#111;
-
     overflow-x:hidden;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 MAIN STICKY STACK
-========================= */
-
+========================================================= */
 
 .main-stack{
-
     position:relative;
-
     width:100%;
-
 }
-
-
 
 .stack-card{
-
     height:100vh;
-
     position:sticky;
-
     top:0;
-
     overflow:hidden;
-
 }
 
 
-
-
-
-
-
-/* =========================
+/* =========================================================
 HERO
-========================= */
-
+========================================================= */
 
 .hero-block{
-
     background:#B9ED00;
-
+    width:100%;
+    min-height:100vh;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
+    overflow:hidden;
 }
-
-
 
 .hero-title{
-
+    width:fit-content;
+    margin:0 auto;
+    padding:0;
+    position:relative;
+    left:-0.24em;
     font-family:'Montserrat',sans-serif;
-
     font-weight:800;
-
     font-size:clamp(70px,7vw,150px);
-
     line-height:.82;
-
     letter-spacing:-.07em;
-
     color:#1A1A1A;
-
     text-align:center;
+}
+
+
+/* =========================================================
+HERO — MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .hero-title{
+        width:fit-content;
+        margin:0 auto;
+        left:-0.24em;
+        font-size:58px;
+        letter-spacing:-.06em;
+        text-align:center;
+    }
 
 }
 
-/* =========================
+
+/* =========================================================
 MANIFEST
-========================= */
+========================================================= */
 
 .manifest-block{
-
     background:#d9d9d9;
-
     width:100%;
-
     min-height:100vh;
-
     padding:8px 16px 16px;
-
     display:flex;
-
     align-items:flex-start;
-
-    box-sizing:border-box;
-
 }
-
-
 
 .manifest-content{
-
     width:100%;
-
     height:100%;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:flex-start;
-
 }
-
-
 
 .manifest-content h1{
-
     margin:0;
-
     padding:0;
-
     font-family:'Inter',sans-serif;
-
-    font-weight:600;
-
+    font-weight:500;
     font-size:clamp(64px,6.5vw,110px);
-
     line-height:.88;
-
     letter-spacing:-.065em;
-
     color:#333;
-
 }
-
-
 
 .manifest-content h1 .line{
-
     display:block;
-
     white-space:nowrap;
+}
 
+.manifest-mobile{
+    display:none;
 }
 
 
-
-/* =========================
+/* =========================================================
 TABLET
-========================= */
+========================================================= */
 
 @media(max-width:1024px){
 
     .manifest-block{
-
         padding:8px 14px 14px;
-
     }
 
-
     .manifest-content h1{
-
         font-size:clamp(50px,6vw,72px);
-
     }
 
 }
 
 
-
-/* =========================
+/* =========================================================
 MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:768px){
 
     .manifest-block{
-
         min-height:auto;
-
         padding:12px 12px 20px;
-
-        display:flex;
-
-        align-items:flex-start;
-
-        justify-content:flex-start;
-
     }
-
 
     .manifest-content{
-
-        width:100%;
-
         height:auto;
-
-        margin:0;
-
-        padding:0;
-
-        display:flex;
-
-        align-items:flex-start;
-
-        justify-content:flex-start;
-
     }
-
 
     .manifest-content h1{
-
         width:100%;
-
-        margin:0;
-
-        padding:0;
-
-        font-size:clamp(46px,12vw,64px);
-
-        line-height:.86;
-
+        font-size:clamp(44px,11.5vw,62px);
+        line-height:.95;
         letter-spacing:-.07em;
-
     }
 
-
     .manifest-content h1 .line{
-
         white-space:normal;
+    }
 
+    .manifest-desktop{
+        display:none;
+    }
+
+    .manifest-mobile{
+        display:block;
+    }
+
+    .manifest-mobile .line:first-child{
+        position:relative;
+        top:2px;
     }
 
 }
 
 
-
-/* =========================
+/* =========================================================
 SMALL MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:480px){
 
     .manifest-block{
-
         padding:10px 10px 18px;
-
     }
-
 
     .manifest-content h1{
-
-        font-size:42px;
-
+        font-size:40px;
         line-height:.88;
-
         letter-spacing:-.065em;
-
     }
 
 }
 
 
-
-/* =========================
+/* =========================================================
 IMAGE LAYERS
-========================= */
+========================================================= */
 
 .image-card{
-
     width:100%;
-
 }
 
-
+.image-card picture{
+    width:100%;
+    height:100%;
+    display:block;
+}
 
 .image-card img{
-
     width:100%;
-
     height:100%;
-
     object-fit:cover;
-
     display:block;
-
-}
-
-
-
-@media(max-width:768px){
-
-    .stack-card.image-card{
-
-        height:auto;
-
-        aspect-ratio:auto;
-
-    }
-
-
-    .stack-card.image-card picture{
-
-        display:block;
-
-        width:100%;
-
-        height:auto;
-
-    }
-
-
-    .stack-card.image-card img{
-
-        display:block;
-
-        width:100%;
-
-        height:auto;
-
-        object-fit:contain;
-
-    }
-
-}
-
-/* =========================
-IMAGE LAYERS
-========================= */
-
-
-.image-card{
-
-    width:100%;
-
-}
-
-
-
-.image-card img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-
 }
 
 @media(max-width:768px){
 
     .stack-card.image-card{
-
         height:auto;
-
         aspect-ratio:auto;
-
     }
-
 
     .stack-card.image-card picture{
-
-        display:block;
-
-        width:100%;
-
         height:auto;
-
     }
 
-
     .stack-card.image-card img{
-
-        display:block;
-
-        width:100%;
-
         height:auto;
-
         object-fit:contain;
-
     }
 
 }
 
-
-/* =========================
+/* =========================================================
 DESCRIPTION
-========================= */
+========================================================= */
 
 .description-block{
     width:100%;
     min-height:100vh;
-
     background:#bdbdb8;
-
-    padding:8px 16px 16px;
-
+    padding:48px;
     display:flex;
     align-items:flex-start;
     justify-content:flex-start;
-
-    box-sizing:border-box;
 }
 
 .description-block p{
     margin:0;
-
     width:100%;
-    max-width:none;
-
     font-family:'Inter',sans-serif;
     font-weight:500;
-    font-size:clamp(30px,3vw,54px);
-    line-height:1.05;
+    font-size:clamp(28px,2.7vw,48px);
+    line-height:1;
     letter-spacing:-.04em;
     color:#333;
 }
 
 
+/* =========================================================
+DESCRIPTION — TABLET
+========================================================= */
 
-/* Планшеты */
-@media (max-width:1024px){
+@media(max-width:1024px){
 
     .description-block{
-        padding:8px 14px 14px;
+        padding:40px;
     }
 
     .description-block p{
-        font-size:clamp(28px,4vw,44px);
+        font-size:clamp(26px,3.6vw,40px);
+        line-height:1;
     }
 
 }
 
-/* Телефоны */
-@media (max-width:768px){
+
+
+/* =========================================================
+DESCRIPTION — MOBILE
+========================================================= */
+
+@media(max-width:768px){
 
     .description-block{
-        padding:6px 10px 10px;
+        padding:28px;
     }
 
     .description-block p{
@@ -468,11 +349,15 @@ DESCRIPTION
 
 }
 
-/* Очень маленькие телефоны */
-@media (max-width:480px){
+
+/* =========================================================
+DESCRIPTION — SMALL MOBILE
+========================================================= */
+
+@media(max-width:480px){
 
     .description-block{
-        padding:4px 8px 8px;
+        padding:20px;
     }
 
     .description-block p{
@@ -482,405 +367,308 @@ DESCRIPTION
 
 }
 
-/* =========================
+/* =========================================================
 CARDS
-========================= */
+========================================================= */
 
 .card-block{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     margin-bottom:18vh;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 HALF
-========================= */
+========================================================= */
 
 .half{
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     overflow:hidden;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 COLORS
-========================= */
+========================================================= */
 
 .orange{
-
     background:#FF6716;
-
 }
-
-
 
 .green{
-
     background:#B9ED00;
-
 }
-
-
 
 .purple{
-
     background:#7182CB;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 SYMBOLS
-========================= */
+========================================================= */
 
 .symbol img{
-
     width:min(72vh,680px);
-
     height:min(72vh,680px);
-
     object-fit:contain;
-
 }
 
 
-
-/* =========================
-TEXT
-========================= */
+/* =========================================================
+TEXT BLOCK
+========================================================= */
 
 .text{
-
     background:#d9d9d9;
-
-    padding:24px 28px 28px;
+    padding:32px 28px 28px;
 
     display:flex;
-
     flex-direction:column;
-
-    justify-content:space-between;
-
+    justify-content:flex-start;
     align-items:flex-start;
-
-    box-sizing:border-box;
-
 }
 
 
+/* =========================================================
+CARD LINK
+========================================================= */
 
-/* =========================
-TITLE
-========================= */
+.card-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
 
-.text h2{
+    margin:0 0 14px 0;
+    padding:0;
 
     font-family:'Inter',sans-serif;
-
-    font-weight:600;
-
-    font-size:clamp(42px,3.2vw,60px);
-
-    line-height:.95;
-
-    letter-spacing:-.045em;
+    font-weight:700;
+    font-size:clamp(42px,3.4vw,62px);
+    line-height:.9;
+    letter-spacing:-.055em;
 
     color:#333333;
+    text-decoration:none;
 
-    margin:0;
-
-    max-width:700px;
-
+    transition:color .2s ease;
 }
 
 
+/* =========================================================
+CARD TITLE
+========================================================= */
 
-/* =========================
-TEXT PARAGRAPH
-========================= */
-
-.text p{
-
-    margin:0;
-
-    max-width:700px;
-
+.card-link span:first-child{
+    color:#333333;
+    transition:color .2s ease;
 }
 
 
-/* =========================
+/* =========================================================
+ARROW
+========================================================= */
+
+.card-arrow{
+    color:#333333;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    line-height:.8;
+    transition:color .2s ease;
+}
+
+
+/* =========================================================
+HOVER
+========================================================= */
+
+.card-link:hover,
+.card-link:hover span:first-child,
+.card-link:hover .card-arrow{
+    color:#5F6FD1;
+}
+
+
+/* =========================================================
 TEXT DESCRIPTION
-========================= */
+========================================================= */
 
 .text p{
+    margin:0;
+    max-width:1000px;
 
     font-family:'Inter',sans-serif;
-
     font-weight:500;
-
-    font-size:clamp(28px,2.1vw,40px);
-
-    line-height:1.12;
-
+    font-size:clamp(24px,1.65vw,31px);
+    line-height:1.02;
     letter-spacing:-.035em;
 
     color:#333333;
-
-    margin:0;
-
-    max-width:850px;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 TABLET
-========================= */
+========================================================= */
 
 @media(max-width:1024px){
 
-
     .text{
-
-        padding:50px;
-
+        padding:40px 28px 28px;
     }
-
-
-
-    .text h2{
-
-        font-size:48px;
-
-    }
-
-
 
     .text p{
-
-        font-size:24px;
-
+        font-size:27px;
+        line-height:1.02;
     }
-
-
 
     .symbol img{
-
         width:75%;
-
         height:75%;
-
     }
 
+    .card-link{
+        font-size:52px;
+        gap:8px;
+        margin-bottom:14px;
+    }
 
 }
 
 
-
-/* =========================
-MOBILE CARDS
-========================= */
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:768px){
 
-
     .card-block{
-
         display:flex;
-
         flex-direction:column;
-
     }
-
-
 
     .symbol{
-
-        height:50vh;
-
         width:100%;
-
+        height:50vh;
         order:1;
-
     }
-
-
 
     .symbol img{
-
         width:90%;
-
         height:90%;
-
     }
-
-
 
     .text{
-
-        height:50vh;
-
         width:100%;
-
+        height:50vh;
         order:2;
 
-        padding:18px 10px;
+        padding:14px;
 
-        justify-content:space-between;
-
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
         align-items:flex-start;
-
     }
 
+    .card-link{
+        order:1;
 
-
-    .text h2{
-
-        font-size:34px;
-
-        line-height:.92;
-
+        font-size:52px;
+        line-height:.88;
         letter-spacing:-.055em;
 
+        gap:8px;
+        margin:0 0 14px 0;
+        padding:0;
     }
-
-
 
     .text p{
+        order:2;
 
         font-size:24px;
-
         line-height:1.15;
-
         letter-spacing:-.03em;
 
+        color:#333333;
     }
-
 
 }
 
 
-
-/* =========================
+/* =========================================================
 SMALL MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:480px){
 
-
     .text{
-
-        padding:14px 8px;
-
+        padding:14px;
     }
 
-
-
-    .text h2{
-
-        font-size:30px;
-
+    .card-link{
+        font-size:48px;
+        gap:7px;
+        margin-bottom:14px;
     }
-
-
 
     .text p{
-
         font-size:22px;
-
         line-height:1.15;
-
+        color:#333333;
     }
-
 
 }
 
-/* =========================
-FIXED LOGO
-========================= */
 
+
+
+
+/* =========================================================
+FIXED LOGO
+========================================================= */
 
 .logo-fixed{
-
     position:fixed;
-
     top:35px;
-
     right:40px;
-
     z-index:9999;
-
     width:60px;
-
     height:60px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     border:2px solid #111;
-
     background:transparent;
 
     transition:.3s ease;
-
     overflow:hidden;
-
 }
-
-
 
 .logo-fixed img{
-
     width:75%;
-
     height:75%;
-
     object-fit:contain;
-
     transition:.3s ease;
-
 }
-
-
 
 .logo-fixed:hover{
-
     background:#111;
-
 }
-
-
 
 .logo-fixed:hover img{
-
     filter:invert(1);
-
 }
 
 
-
-/* =========================
-   FIXED LOGO — GRAY STATE
-========================= */
+/* =========================================================
+FIXED LOGO — GRAY STATE
+========================================================= */
 
 .logo-fixed.dark{
     border-color:#D9D9D9;
@@ -890,9 +678,10 @@ FIXED LOGO
     content:url("images/logo-gray.svg");
 }
 
-/* =========================
-   DARK LOGO — HOVER
-========================= */
+
+/* =========================================================
+DARK LOGO — HOVER
+========================================================= */
 
 .logo-fixed.dark:hover{
     background:#98E915;
@@ -903,11 +692,13 @@ FIXED LOGO
     content:url("images/logo.svg");
     filter:none;
 }
-/* =========================
-   FIXED LOGO — MOBILE
-========================= */
 
-@media (max-width:768px){
+
+/* =========================================================
+FIXED LOGO — MOBILE
+========================================================= */
+
+@media(max-width:768px){
 
     .logo-fixed{
         width:44px;
@@ -916,547 +707,360 @@ FIXED LOGO
         right:20px;
     }
 
-    .logo-fixed img{
-        width:75%;
-        height:75%;
-    }
-
 }
 
 
-/* =========================
+/* =========================================================
 MOBILE CONTACT LOGO POSITION
-========================= */
+========================================================= */
 
 @media(max-width:768px){
 
     .logo-fixed.mobile-contact-position{
-
         top:auto;
-
         bottom:20px;
-
     }
 
 }
 
 
-/* =========================
+/* =========================================================
 LETTER ANIMATION
-========================= */
-
+========================================================= */
 
 .hero-letter-wrap{
-
     display:inline-block;
-
     overflow:hidden;
-
     vertical-align:bottom;
-
 }
-
-
 
 .hero-letter{
-
+    will-change:transform;
     display:inline-block;
-
 }
 
 
-
-
-
-
-
-/* =========================
-SLOGAN
-ПРИШЕЛ. УСЛЫШАЛ. ЗАПИЛИЛ.
-========================= */
-
-
-.slogan-block{
-
-    background:#292929;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    overflow:hidden;
-
-}
-
-
-
-.slogan-line{
-
-    display:flex;
-
-    gap:.28em;
-
-    font-family:'Inter',sans-serif;
-
-    font-weight:700;
-
-    font-size:clamp(48px,5vw,90px);
-
-    letter-spacing:-.055em;
-
-    line-height:1;
-
-    white-space:nowrap;
-
-}
-
-
-
-.slogan-line .word{
-
-    display:inline-block;
-
-}
-
-
-
-.slogan-line .light{
-
-    color:#D9D9D9;
-
-}
-
-
-
-.slogan-line .green{
-
-    color:#98E915;
-
-    background:none;
-
-}
-
-
-/* =========================
+/* =========================================================
 МАСТЕР-КЛАССЫ
-========================= */
+========================================================= */
 
 .workshops-block{
-
     width:100%;
-
     min-height:100vh;
-
     background:#D9D9D9;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:flex-start;
 
-    padding:8px 16px 16px;
-
-    box-sizing:border-box;
-
+    padding:40px 48px 16px;
 }
 
-
-
 .workshops-block h2{
-
-    margin:0 0 24px;
+    margin:0 0 8px;
 
     font-family:'Inter',sans-serif;
-
-    font-weight:600;
-
+    font-weight:700;
     font-size:clamp(50px,4.4vw,76px);
-
     line-height:.95;
-
     letter-spacing:-.055em;
 
     color:#7182CB;
-
 }
-
-
 
 .workshops-block p{
-
     margin:0;
+    padding:0 48px 0 0;
 
     font-family:'Inter',sans-serif;
-
     font-weight:500;
-
     font-size:clamp(30px,2.4vw,44px);
-
     line-height:1.1;
-
     letter-spacing:-.035em;
 
     width:100%;
-
-    max-width:none;
-
     color:#292929;
+}
 
+.workshops-block p + p{
+    padding-left:1em;
 }
 
 
+/* =========================================================
+WORKSHOPS — TABLET
+========================================================= */
 
-/* =========================
-TABLET
-========================= */
-
-@media (max-width:1024px){
+@media(max-width:1024px){
 
     .workshops-block{
-
-        padding:8px 14px 20px;
-
+        padding:32px 38px 20px;
     }
 
-
-
     .workshops-block h2{
-
         font-size:clamp(44px,5vw,60px);
-
-        margin-bottom:20px;
-
     }
 
-
-
     .workshops-block p{
-
+        padding-right:38px;
         font-size:clamp(26px,3vw,34px);
-
     }
 
 }
 
 
+/* =========================================================
+WORKSHOPS — MOBILE
+========================================================= */
 
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width:768px){
-
-    .workshops-block{
-
-        padding:6px 10px 40px;
-
-    }
-
-
-
-    .workshops-block h2{
-
-        font-size:38px;
-
-        margin-bottom:16px;
-
-    }
-
-
-
-    .workshops-block p{
-
-        font-size:21px;
-
-        line-height:1.12;
-
-    }
-
-}
-
-
-
-/* =========================
-SMALL MOBILE
-========================= */
-
-@media (max-width:480px){
+@media(max-width:768px){
 
     .workshops-block{
-
-        padding:4px 8px 40px;
-
+        padding:20px 14px 40px;
     }
-
-
 
     .workshops-block h2{
-
-        font-size:34px;
-
-        margin-bottom:14px;
-
+        font-size:35px;
+        margin-bottom:8px;
     }
 
-
-
     .workshops-block p{
-
+        padding:0;
         font-size:19px;
+        line-height:1.12;
+    }
 
-        line-height:1.1;
-
+    .workshops-block p + p{
+        padding-left:0;
     }
 
 }
 
 
+/* =========================================================
+WORKSHOPS — SMALL MOBILE
+========================================================= */
 
-/* =========================
+@media(max-width:480px){
+
+    .workshops-block{
+        padding:18px 12px 40px;
+    }
+
+    .workshops-block h2{
+        font-size:32px;
+        margin-bottom:7px;
+    }
+
+    .workshops-block p{
+        font-size:18px;
+        line-height:1.1;
+    }
+
+}
+
+
+/* =========================================================
 ДЖЕМЫ
-========================= */
+========================================================= */
 
 .jams-block{
-
     background:#D9D9D9;
-
     width:100%;
-
     min-height:100vh;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:flex-start;
 
-    padding:8px 16px 16px;
-
-    box-sizing:border-box;
-
+    padding:40px 48px 16px;
 }
-
-
 
 .jams-block h2{
-
-    font-family:'Inter', sans-serif;
-
-    font-weight:600;
-
+    font-family:'Inter',sans-serif;
+    font-weight:700;
     font-size:clamp(52px,4.5vw,78px);
-
     line-height:.95;
-
     letter-spacing:-.055em;
 
-    margin:0 0 24px;
+    margin:0 0 8px;
 
     color:#FF6716;
-
 }
 
-
-
 .jams-block p{
-
-    font-family:'Inter', sans-serif;
-
+    font-family:'Inter',sans-serif;
     font-weight:500;
-
     font-size:clamp(30px,2.45vw,46px);
-
     line-height:1.12;
-
     letter-spacing:-.035em;
 
     width:100%;
-
-    max-width:none;
-
     margin:0;
+    padding:0 48px 0 0;
 
     color:#292929;
+}
 
+.jams-block p + p{
+    padding-left:1em;
 }
 
 
+/* =========================================================
+JAMS — TABLET
+========================================================= */
 
-/* =========================
-TABLET
-========================= */
-
-@media (max-width:1024px){
+@media(max-width:1024px){
 
     .jams-block{
-
-        padding:8px 14px 20px;
-
+        padding:32px 38px 20px;
     }
 
-
-
     .jams-block h2{
-
         font-size:clamp(46px,5vw,64px);
-
-        margin-bottom:20px;
-
     }
 
-
-
     .jams-block p{
-
+        padding-right:38px;
         font-size:clamp(28px,3.2vw,38px);
-
     }
 
 }
 
 
+/* =========================================================
+JAMS — MOBILE
+========================================================= */
 
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width:768px){
-
-    .jams-block{
-
-        padding:6px 10px 40px;
-
-    }
-
-
-
-    .jams-block h2{
-
-        font-size:42px;
-
-        margin-bottom:16px;
-
-    }
-
-
-
-    .jams-block p{
-
-        font-size:21px;
-
-        line-height:1.12;
-
-    }
-
-}
-
-
-
-/* =========================
-SMALL MOBILE
-========================= */
-
-@media (max-width:480px){
+@media(max-width:768px){
 
     .jams-block{
-
-        padding:4px 8px 40px;
-
+        padding:20px 14px 40px;
     }
-
-
 
     .jams-block h2{
-
-        font-size:36px;
-
-        margin-bottom:14px;
-
+        font-size:39px;
+        margin-bottom:8px;
     }
 
-
-
     .jams-block p{
-
+        padding:0;
         font-size:19px;
+        line-height:1.12;
+    }
 
-        line-height:1.1;
-
+    .jams-block p + p{
+        padding-left:0;
     }
 
 }
 
 
-/* =========================
+/* =========================================================
+JAMS — SMALL MOBILE
+========================================================= */
+
+@media(max-width:480px){
+
+    .jams-block{
+        padding:18px 12px 40px;
+    }
+
+    .jams-block h2{
+        font-size:33px;
+        margin-bottom:7px;
+    }
+
+    .jams-block p{
+        font-size:18px;
+        line-height:1.1;
+    }
+
+}
+
+
+/* =========================================================
+FINAL TEXT WIDTH
+========================================================= */
+
+.final-text-block p{
+    width:86%;
+    max-width:1050px;
+}
+
+@media(max-width:768px){
+
+    .final-text-block p{
+        width:100%;
+        max-width:none;
+    }
+
+}
+
+/* =========================================================
 РАСПИСАНИЕ
-========================= */
+========================================================= */
 
 .meetings-block{
-    background:#292929;
-
+    background:transparent;
     width:100%;
     min-height:100vh;
 
     display:flex;
     flex-direction:column;
-    justify-content:flex-start;
+    justify-content:center;
+    align-items:center;
 
-    padding:8px 16px 16px;
-
+    padding:48px;
     box-sizing:border-box;
 }
 
 .meetings-block p{
-    font-family:'Inter', sans-serif;
+    font-family:'Inter',sans-serif;
     font-weight:500;
-
-    /* немного увеличил */
-    font-size:clamp(30px,2.45vw,46px);
-
-    line-height:1.12;
+    font-size:clamp(22px,1.55vw,29px);
+    line-height:1;
     letter-spacing:-.035em;
 
-    width:100%;
-    max-width:none;
-
+    width:76%;
+    max-width:1000px;
     margin:0;
 
     color:#D9D9D9;
+
+    transform:translateX(3%);
+}
+
+/* =========================================================
+MEETINGS — TABLET
+========================================================= */
+
+@media(max-width:1024px){
+
+    .meetings-block p{
+        width:78%;
+        font-size:clamp(21px,2.4vw,30px);
+        line-height:1;
+
+        transform:translateX(3%);
+    }
+
 }
 
 
-/* =========================
-TABLET
-========================= */
+/* =========================================================
+MEETINGS — MOBILE
+========================================================= */
 
-@media (max-width:1024px){
+@media(max-width:768px){
 
     .meetings-block{
-        padding:8px 14px 20px;
+        padding:30vh 28px 28px;
     }
 
     .meetings-block p{
-        font-size:clamp(28px,3.2vw,38px);
-    }
-
-}
-
-
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width:768px){
-
-    .meetings-block{
-        padding:6px 10px 60px;
-        /* запас снизу для комфортного скролла */
-    }
-
-    .meetings-block p{
+        width:100%;
         font-size:24px;
         line-height:1.15;
     }
@@ -1464,347 +1068,182 @@ MOBILE
 }
 
 
-/* =========================
-SMALL MOBILE
-========================= */
+/* =========================================================
+MEETINGS — SMALL MOBILE
+========================================================= */
 
-@media (max-width:480px){
+@media(max-width:480px){
 
     .meetings-block{
-        padding:4px 8px 70px;
+        padding:25vh 20px 20px;
     }
 
     .meetings-block p{
+        width:100%;
         font-size:22px;
     }
 
 }
 
-/* =========================
-RESIDENT PHOTO
-========================= */
 
-
-.residents-photo{
-
-    width:50vw;
-
-    height:auto;
-
-    max-height:45vh;
-
-    object-fit:contain;
-
-    display:block;
-
-    margin:40px auto 0;
-
-}
-
-
-
-
-
-/* =========================
+/* =========================================================
 GALLERY
-========================= */
+========================================================= */
 
 .gallery-card{
-
     background:#292929;
-
 }
-
-
-
-/* =========================
-GALLERY CONTAINER
-========================= */
 
 .gallery-container{
-
     width:100%;
-
     height:100%;
-
     position:relative;
-
 }
-
-
 
 .gallery-container picture{
-
     display:block;
-
     width:100%;
-
     height:100%;
-
 }
 
-
-
 .gallery-container img{
+    will-change:opacity;
 
     width:100%;
-
     height:100%;
 
     object-fit:cover;
-
     display:block;
 
-    transition:opacity .45s ease, transform .45s ease;
-
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
 }
 
 
-
-/* =========================
+/* =========================================================
 GALLERY UI
-========================= */
+========================================================= */
 
 .gallery-ui{
-
     position:absolute;
-
     inset:0;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
     padding:0 55px;
 
     pointer-events:none;
-
 }
 
-
-
 .gallery-arrow{
-
     pointer-events:auto;
 
     background:none;
-
     border:none;
 
     color:#D9D9D9;
 
-    font-family:Arial, sans-serif;
-
+    font-family:Arial,sans-serif;
     font-size:90px;
-
     font-weight:300;
-
     line-height:1;
 
     cursor:pointer;
-
     opacity:.7;
 
     transition:.25s ease;
-
 }
-
-
 
 .gallery-arrow:hover{
-
     opacity:1;
-
     transform:scale(1.08);
-
 }
 
 
-
-.gallery-prev{
-
-    transform:translateX(0);
-
-}
-
-
-
-.gallery-next{
-
-    transform:translateX(0);
-
-}
-
-
-
-/* =========================
-MOBILE
-========================= */
+/* =========================================================
+GALLERY — MOBILE
+========================================================= */
 
 @media(max-width:768px){
 
     .gallery-card{
-
         width:100%;
-
         aspect-ratio:1 / 1;
-
         min-height:0;
-
         height:auto;
-
     }
-
-
 
     .gallery-container{
-
         width:100%;
-
         height:100%;
-
         aspect-ratio:1 / 1;
-
-        position:relative;
-
         overflow:hidden;
-
     }
-
-
 
     .gallery-container picture{
-
-        display:block;
-
         width:100%;
-
         height:100%;
-
     }
-
-
 
     .gallery-container img{
-
         width:100%;
-
         height:100%;
-
         object-fit:cover;
-
-        display:block;
-
     }
-
-
-
-    /* =========================
-    GALLERY UI
-    ========================= */
 
     .gallery-ui{
-
-        position:absolute;
-
-        inset:0;
-
         width:100%;
-
         height:100%;
-
         padding:0 20px;
-
-        box-sizing:border-box;
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:space-between;
-
     }
-
-
 
     .gallery-arrow{
-
         font-size:60px;
-
-        opacity:.7;
-
-    }
-
-
-
-    .gallery-progress{
-
-        margin:0 18px;
-
-    }
-
-
-
-    #gallery-counter{
-
-        font-size:15px;
-
     }
 
 }
 
-/* =========================
+
+/* =========================================================
 CONTACT BLOCK
-========================= */
+========================================================= */
 
 .contact-block{
-
     background:#292929;
-
     color:#D9D9D9;
 
     display:flex;
-
     flex-direction:column;
 
     min-height:100vh;
 
     padding:70px 80px;
 
-    box-sizing:border-box;
-
     overflow:visible;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 CONTACT BIG LOGO TOP
-========================= */
+========================================================= */
 
 .contact-end-logo{
-
     width:100%;
-
     text-align:center;
 
     margin:0;
-
     padding:0;
 
-    transform:translateY(-0.08em);
+    transform:translateY(-.08em);
 
     font-family:'Montserrat',sans-serif;
-
     font-weight:800;
 
     font-size:clamp(55px,8.5vw,170px);
-
     line-height:.75;
-
     letter-spacing:-.065em;
 
     color:#D9D9D9;
@@ -1812,31 +1251,22 @@ CONTACT BIG LOGO TOP
     white-space:nowrap;
 
     transition:.35s ease;
-
 }
-
-
 
 .contact-end-logo:hover{
-
     color:#98E915;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 SLOGAN
-========================= */
+========================================================= */
 
 .slogan-line{
-
     width:100%;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     gap:.28em;
@@ -1844,407 +1274,274 @@ SLOGAN
     margin-top:60px;
 
     font-family:'Inter',sans-serif;
-
     font-weight:700;
 
     font-size:clamp(28px,2.5vw,48px);
-
     line-height:1;
-
     letter-spacing:-.055em;
 
     white-space:nowrap;
-
 }
-
-
 
 .slogan-line .word{
-
     display:inline-block;
-
 }
-
-
 
 .slogan-line .green{
-
     color:#7182CB;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 CONTACT BOTTOM
-========================= */
+========================================================= */
 
 .contact-bottom{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:flex-end;
 
     margin-top:auto;
 
     background:#292929;
-
 }
 
-
-
 .contact-left{
-
     width:40%;
 
     display:flex;
-
     flex-direction:column;
 
     gap:34px;
-
 }
-
-
 
 .contact-socials{
-
     display:flex;
-
     flex-direction:column;
-
     gap:14px;
-
 }
 
-
-
 .contact-socials a{
-
     font-family:'Inter',sans-serif;
-
-    font-weight:600;
+    font-weight:700;
 
     font-size:clamp(34px,2.6vw,54px);
-
     line-height:.95;
-
     letter-spacing:-.045em;
 
     color:#D9D9D9;
-
     text-decoration:none;
 
     transition:.25s ease;
-
 }
-
-
 
 .contact-socials a:nth-child(1):hover{
-
     color:#FF6716;
-
 }
-
-
 
 .contact-socials a:nth-child(2):hover{
-
     color:#98E915;
-
 }
-
-
 
 .contact-socials a:nth-child(3):hover{
-
     color:#7182CB;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 EMAIL
-========================= */
+========================================================= */
 
 .contact-input{
-
     display:flex;
 
     width:100%;
-
     max-width:460px;
-
 }
 
-
-
 .contact-input input{
-
     flex:1;
-
     min-width:0;
 
     background:none;
-
     border:none;
-
     border-bottom:2px solid #D9D9D9;
 
     color:#D9D9D9;
 
+    font-family:'Inter',sans-serif;
+    font-weight:500;
     font-size:24px;
 
     padding:14px 0;
 
     outline:none;
-
 }
-
-
 
 .contact-input input::placeholder{
-
     color:#777;
-
 }
 
-
-
 .contact-input button{
-
     width:50px;
-
     flex-shrink:0;
 
     background:none;
-
     border:none;
-
     border-bottom:2px solid #D9D9D9;
 
     color:#D9D9D9;
 
+    font-family:'Inter',sans-serif;
+    font-weight:700;
     font-size:42px;
-
 }
-
-
 
 .contact-input button:hover{
-
     color:#98E915;
-
     border-color:#98E915;
-
 }
 
 
-
-/* =========================
+/* =========================================================
 CONTACT RIGHT
-========================= */
+========================================================= */
 
 .contact-right{
-
     text-align:right;
-
 }
 
-
-
 .contact-right span{
-
     display:block;
 
     color:#8e8e8e;
 
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+
     font-size:22px;
 
     margin-bottom:14px;
-
 }
-
-
 
 .contact-right h2{
-
     font-family:'Inter',sans-serif;
-
-    font-weight:600;
+    font-weight:700;
 
     font-size:clamp(38px,3.5vw,64px);
-
     line-height:.9;
-
     letter-spacing:-.06em;
-
 }
 
 
+/* =========================================================
+СЕВКАБЕЛЬ-ПОРТ — LINK
+========================================================= */
 
-/* =========================
-TABLET
-========================= */
+.sevcable-link{
+    color:inherit;
+    font:inherit;
+    letter-spacing:inherit;
+    line-height:inherit;
+
+    text-decoration:none;
+
+    transition:color .25s ease;
+}
+
+.sevcable-link:hover{
+    color:#98E915;
+}
+
+
+/* =========================================================
+CONTACT — TABLET
+========================================================= */
 
 @media(max-width:1024px){
 
     .contact-block{
-
         padding:60px 50px;
-
     }
-
-
 
     .contact-left{
-
         width:45%;
-
     }
 
-
-
     .slogan-line{
-
         font-size:clamp(26px,3vw,42px);
-
     }
 
 }
 
 
-
-/* =========================
-MOBILE
-========================= */
+/* =========================================================
+CONTACT — MOBILE
+========================================================= */
 
 @media(max-width:768px){
 
     .contact-block{
-
         padding:0;
-
         min-height:100svh;
-
-        background:#292929;
-
-        display:flex;
-
-        flex-direction:column;
-
-        overflow:visible;
-
     }
 
-
-
-    /* =========================
-    CONTACT BIG LOGO
-    ========================= */
-
     .contact-end-logo{
-
         width:100%;
 
         display:flex;
-
         justify-content:center;
-
         align-items:flex-start;
 
-        padding:32px 8px 0;
-
-        box-sizing:border-box;
+        padding:8px 6px 0;
 
         transform:none;
 
-        font-size:clamp(38px,9.5vw,58px);
-
+        font-size:clamp(42px,10.8vw,64px);
         line-height:.8;
+        letter-spacing:-.075em;
 
-        letter-spacing:-.065em;
+        white-space:nowrap;
+        overflow:hidden;
 
         will-change:transform,opacity;
-
     }
 
-
-
-    /* =========================
-    SLOGAN
-    ========================= */
-
     .slogan-line{
-
         width:100%;
 
         display:flex;
-
-        flex-direction:row;
-
         justify-content:center;
-
         align-items:center;
 
         gap:.18em;
 
-        margin:0;
+        margin-top:30px;
 
-        padding:95px 0 40px;
-
-        box-sizing:border-box;
-
-        font-size:clamp(25px,7vw,34px);
-
+        font-size:clamp(18px,5.5vw,28px);
         line-height:1;
-
-        letter-spacing:-.065em;
+        letter-spacing:-.055em;
 
         white-space:nowrap;
-
-        text-align:center;
-
     }
 
-
-
-    .slogan-line .word{
-
-        display:inline-block;
-
-        margin:0;
-
-        padding:0;
-
+    .slogan-line .light{
+        color:#D9D9D9;
     }
 
-
-
-    .slogan-line .green{
-
-        color:#7182CB;
-
+    .slogan-line .slogan-accent{
+        color:#7182CB !important;
+        -webkit-text-fill-color:#7182CB !important;
+        -webkit-text-stroke:0 !important;
+        text-shadow:none !important;
+        filter:none !important;
     }
-
-
-
-    /* =========================
-    CONTACTS
-    ========================= */
 
     .contact-bottom{
-
         width:100%;
 
         display:flex;
-
         flex-direction:column;
-
         align-items:flex-start;
 
         gap:35px;
@@ -2253,256 +1550,68 @@ MOBILE
 
         padding:0 16px 24px;
 
-        background:#292929;
-
         box-sizing:border-box;
-
     }
-
-
 
     .contact-left{
-
-        width:100%;
-
+        width:calc(100% - 80px);
         gap:28px;
-
     }
-
-
 
     .contact-socials{
-
         gap:12px;
-
     }
-
-
 
     .contact-socials a{
-
         font-size:32px;
-
     }
-
-
-
-    /* =========================
-    MOBILE EMAIL
-    ========================= */
 
     .contact-input{
-
-        width:calc(100% - 70px);
-
+        width:100%;
         max-width:none;
-
     }
-
-
 
     .contact-input input{
-
-        min-width:0;
-
         width:100%;
-
         font-size:20px;
-
     }
-
-
 
     .contact-input button{
-
         width:42px;
-
-        flex-shrink:0;
-
         font-size:36px;
-
     }
-
-
-
-    /* =========================
-    CONTACT RIGHT
-    ========================= */
 
     .contact-right{
-
-        width:100%;
-
+        width:calc(100% - 80px);
         text-align:left;
-
     }
-
-
 
     .contact-right span{
-
-        font-size:18px;
-
+        width:100%;
+        font-size:15px;
+        line-height:1;
+        margin-bottom:10px;
+        white-space:nowrap;
     }
-
-
 
     .contact-right h2{
-
-        font-size:42px;
-
-    }
-
-
-
-    /* =========================
-    FIXED LOGO — MOBILE
-    ========================= */
-
-    .logo-fixed{
-
-        width:46px;
-
-        height:46px;
-
-        top:24px;
-
-        right:16px;
-
-    }
-
-
-
-    .logo-fixed img{
-
-        width:72%;
-
-        height:72%;
-
-    }
-
-
-
-    /* =========================
-    FIXED LOGO — CONTACT
-    ========================= */
-
-    .logo-fixed.mobile-contact-position{
-
-        top:auto !important;
-
-        bottom:20px;
-
-    }
-
-}
-
-
-
-/* =========================
-SMALL MOBILE
-========================= */
-
-@media(max-width:480px){
-
-    .contact-end-logo{
-
-        font-size:34px;
-
-    }
-
-
-
-    .slogan-line{
-
-        font-size:clamp(22px,6.5vw,28px);
-
-        gap:.14em;
-
-        padding-top:90px;
-
-        letter-spacing:-.07em;
-
-    }
-
-
-
-    .contact-socials a{
-
+        width:100%;
         font-size:30px;
-
-    }
-
-
-
-    .contact-right h2{
-
-        font-size:38px;
-
-    }
-
-
-
-    /* EMAIL */
-
-    .contact-input{
-
-        width:calc(100% - 60px);
-
-    }
-
-
-
-    /* FIXED LOGO */
-
-    .logo-fixed{
-
-        width:42px;
-
-        height:42px;
-
-        top:20px;
-
-        right:14px;
-
-    }
-
-
-
-    .logo-fixed.mobile-contact-position{
-
-        top:auto !important;
-
-        bottom:16px;
-
+        line-height:.9;
+        letter-spacing:-.06em;
+        white-space:nowrap;
     }
 
 }
-/* =========================
+
+
+/* =========================================================
 PICTURE RESPONSIVE IMAGES
-========================= */
-
-.image-card picture{
-
-    width:100%;
-
-    height:100%;
-
-    display:block;
-
-}
-
-
+========================================================= */
 
 .image-card picture img{
-
     width:100%;
-
     height:100%;
-
     object-fit:cover;
-
     display:block;
-
 }
-
