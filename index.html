@@ -1,765 +1,1065 @@
-<!DOCTYPE html>
-<html lang="ru">
+/* =========================================================
+PILIM И PILIM
+JS
+Анимации + повторный запуск после клика по фиксированному логотипу
+========================================================= */
 
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =========================================================
+UTILS
+========================================================= */
 
-<title>ПИЛИМ И ПИЛИМ</title>
+function isMobile(){
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    return window.matchMedia("(max-width:768px)").matches;
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+}
 
-<link rel="stylesheet" href="style.css">
 
-</head>
+function observeOnce(elements,callback,options={}){
 
+    if(!elements || !elements.length) return;
 
-<body>
+    const observer = new IntersectionObserver(
 
+        (entries,obs)=>{
 
-<a href="#" class="logo-fixed">
-    <img src="images/logo.svg" alt="Пилим и Пилим">
-</a>
+            entries.forEach(entry=>{
 
+                if(!entry.isIntersecting) return;
 
-<div class="main-stack">
+                callback(entry.target);
 
+                obs.unobserve(entry.target);
 
+            });
 
-<section class="stack-card hero-block">
+        },
 
+        {
+            threshold:options.threshold ?? .15,
+            rootMargin:options.rootMargin ?? "0px 0px -10% 0px"
+        }
 
-<div class="hero-title">
+    );
 
-ПИЛИМ И <br>
-ПИЛИМ
+    elements.forEach(element=>observer.observe(element));
 
-</div>
+    return observer;
 
+}
 
-</section>
 
+/* =========================================================
+HERO
+========================================================= */
 
+function initHero(){
 
+    const hero=document.querySelector(".hero-title");
 
+    if(!hero) return;
 
-<section class="stack-card manifest-block">
+    if(!hero.querySelector(".hero-letter")){
 
+        const walker=document.createTreeWalker(
+            hero,
+            NodeFilter.SHOW_TEXT
+        );
 
-<div class="manifest-content">
+        const textNodes=[];
 
+        while(walker.nextNode()){
+            textNodes.push(walker.currentNode);
+        }
 
-<h1>
+        textNodes.forEach(node=>{
 
-<span class="line">
-Мастерская звука и дерева
-</span>
+            const fragment=document.createDocumentFragment();
 
-<span class="line">
-в Севкабель-Порту
-</span>
+            [...node.textContent].forEach(char=>{
 
-</h1>
+                if(char===" "){
 
+                    fragment.appendChild(
+                        document.createTextNode(" ")
+                    );
 
-</div>
+                    return;
 
+                }
 
-</section>
+                const wrap=document.createElement("span");
+                wrap.className="hero-letter-wrap";
 
+                const letter=document.createElement("span");
+                letter.className="hero-letter";
+                letter.textContent=char;
 
+                wrap.appendChild(letter);
+                fragment.appendChild(wrap);
 
+            });
 
+            node.replaceWith(fragment);
 
-<section class="stack-card image-card">
+        });
 
+    }
 
-<picture>
+    const letters=hero.querySelectorAll(".hero-letter");
 
-<source
-media="(max-width:768px)"
-srcset="images/mobile/01.jpg">
+    if(!letters.length) return;
 
+    gsap.set(letters,{
+        yPercent:110
+    });
 
-<img
-src="images/desktop/01.jpg"
-alt="">
+    gsap.to(letters,{
+        yPercent:0,
+        duration:.9,
+        stagger:.045,
+        ease:"power4.out"
+    });
 
-</picture>
+}
 
 
-</section>
+/* =========================================================
+MANIFEST
+========================================================= */
 
+function initManifest(){
 
+    const block=document.querySelector(".manifest-block");
 
+    if(!block) return;
 
+    block.querySelectorAll(".line").forEach(line=>{
 
-<section class="stack-card description-block reveal-block">
+        if(line.querySelector(".manifest-letter")) return;
 
+        const text=line.textContent.trim();
+        const fragment=document.createDocumentFragment();
 
-<p>
+        text.split(/\s+/).forEach((word,index,words)=>{
 
-«Пилим и Пилим» — независимая мастерская,
-объединяющая ремесло, музыку и культуру
-совместного творчества. Мы пьем чай, создаём предметы
-из дерева, строим музыкальные инструменты, играем музыку и тем самым исследуем то, как материалы,
-звук и люди могут вдохновлять друг друга.
+            const wordWrap=document.createElement("span");
 
-</p>
+            wordWrap.className="manifest-word";
 
+            if(word.toUpperCase()==="МАСТЕРСКАЯ"){
+                wordWrap.classList.add("manifest-workshop-word");
+            }
 
-</section>
+            wordWrap.style.cssText=
+                "display:inline-block;vertical-align:top;";
 
+            [...word].forEach(char=>{
 
+                const letter=document.createElement("span");
 
+                letter.className="manifest-letter";
+                letter.textContent=char;
+                letter.style.display="inline-block";
 
+                wordWrap.appendChild(letter);
 
-<section class="stack-card image-card">
+            });
 
+            fragment.appendChild(wordWrap);
 
-<picture>
+            if(index<words.length-1){
 
-<source
-media="(max-width:768px)"
-srcset="images/mobile/02.jpg">
+                fragment.appendChild(
+                    document.createTextNode(" ")
+                );
 
+            }
 
-<img
-src="images/desktop/02.jpg"
-alt="">
+        });
 
-</picture>
+        line.replaceChildren(fragment);
 
+    });
 
-</section>
+    const letters=block.querySelectorAll(".manifest-letter");
 
+    if(!letters.length) return;
 
+    gsap.set(letters,{
+        y:35,
+        opacity:0,
+        filter:"blur(2px)"
+    });
 
+    observeOnce(
+        [block],
+        ()=>{
 
+            gsap.to(letters,{
+                y:0,
+                opacity:1,
+                filter:"blur(0px)",
+                duration:.55,
+                stagger:.018,
+                ease:"power2.out"
+            });
 
-<section class="stack-card card-block">
+        },
+        {
+            threshold:.15,
+            rootMargin:"0px 0px -15% 0px"
+        }
+    );
 
+}
 
-<div class="half symbol orange">
 
-<img src="images/tea.svg" alt="">
+/* =========================================================
+CONTACT SLOGAN
+========================================================= */
 
-</div>
+function initSlogan(){
 
+    const contact=document.querySelector(".contact-block");
+    const words=contact?.querySelectorAll(".slogan-line .word");
 
-<div class="half text">
+    if(!contact || !words?.length) return;
 
+    const accent=contact.querySelector(".slogan-accent");
 
-<h2>
-Пьем чай
-</h2>
+    if(accent){
 
+        accent.style.setProperty(
+            "color",
+            "#7182CB",
+            "important"
+        );
 
-<p>
+    }
 
-Пауза — настройка слуха. Завариваем, разливаем, молчим.
-Слушаем воду,
-стук пиал, дыхание залива.<br>
-Чаем занимается Хранитель пауз.
-Посуда — ручная работа, можно заполучить.
+    gsap.set(words,{
+        y:70,
+        opacity:0
+    });
 
-</p>
+    observeOnce(
+        [contact],
+        ()=>{
 
+            gsap.to(words,{
+                y:0,
+                opacity:1,
+                duration:1.1,
+                stagger:.25,
+                ease:"power4.out"
+            });
 
-</div>
+        },
+        {
+            threshold:.2,
+            rootMargin:"0px 0px -10% 0px"
+        }
+    );
 
+}
 
-</section>
 
+/* =========================================================
+SYMBOLS
+========================================================= */
 
+function initSymbols(){
 
+    const symbols=document.querySelectorAll(".symbol img");
 
+    if(!symbols.length) return;
 
-<section class="stack-card card-block">
+    gsap.set(symbols,{
+        scale:.82,
+        opacity:0,
+        filter:"blur(8px)",
+        y:30
+    });
 
+    observeOnce(
+        symbols,
+        symbol=>{
 
-<div class="half text">
+            gsap.to(symbol,{
+                scale:1,
+                opacity:1,
+                filter:"blur(0px)",
+                y:0,
+                duration:1.1,
+                ease:"power3.out"
+            });
 
+        },
+        {
+            threshold:.2,
+            rootMargin:"0px 0px -10% 0px"
+        }
+    );
 
-<h2>
-Делаем классные деревяшки
-</h2>
+}
 
 
-<p>
+/* =========================================================
+CARDS
+========================================================= */
 
-Чайные принадлежности и другая красота из дерева разных пород.
-Масло вместо лака.
-Слышишь? — это дерево дышит.
-Каждая поверхность хранит след инструмента и времени.
+function initCards(){
 
-</p>
+    const cards=document.querySelectorAll(".card-block");
 
+    if(!cards.length) return;
 
-</div>
+    /*
+       Заголовки больше не анимируем,
+       так как они скрыты через CSS.
 
+       Текст карточек проходит через
+       общую word-by-word reveal-анимацию
+       в initTextReveals().
+    */
 
-<div class="half symbol green">
+}
 
-<img src="images/wood.svg" alt="">
 
-</div>
+/* =========================================================
+LONG TEXT
+========================================================= */
 
+function initTextReveals(){
 
-</section>
+    const selectors=[
 
+        ".description-block p",
+        ".workshops-block p",
+        ".jams-block p",
+        ".meetings-block p",
+        ".final-text-block p",
+        ".card-block .text p"
 
+    ];
 
+    const blocks=document.querySelectorAll(
+        selectors.join(",")
+    );
 
+    if(!blocks.length) return;
 
-<section class="stack-card image-card">
+    blocks.forEach(block=>{
 
+        let words=block.querySelectorAll(
+            ".description-word"
+        );
 
-<picture>
+        if(!words.length){
 
-<source
-media="(max-width:768px)"
-srcset="images/mobile/03.jpg">
+            const walker=document.createTreeWalker(
+                block,
+                NodeFilter.SHOW_TEXT
+            );
 
+            const textNodes=[];
 
-<img
-src="images/desktop/03.jpg"
-alt="">
+            while(walker.nextNode()){
+                textNodes.push(walker.currentNode);
+            }
 
-</picture>
+            textNodes.forEach(node=>{
 
+                if(!node.textContent.trim()) return;
 
-</section>
+                const fragment=document.createDocumentFragment();
 
+                node.textContent
+                    .split(/(\s+)/)
+                    .forEach(part=>{
 
-<!-- =========================
-7. INSTRUMENTS
-========================= -->
+                        if(!part.trim()){
 
+                            fragment.appendChild(
+                                document.createTextNode(part)
+                            );
 
-<section class="stack-card card-block instruments">
+                            return;
 
+                        }
 
-<div class="half symbol purple">
+                        const span=document.createElement("span");
 
-<img src="images/instruments.svg" alt="">
+                        span.className="description-word";
+                        span.textContent=part;
+                        span.style.display="inline-block";
 
+                        fragment.appendChild(span);
 
-</div>
+                    });
 
+                node.replaceWith(fragment);
 
+            });
 
+            words=block.querySelectorAll(
+                ".description-word"
+            );
 
-<div class="half text">
+        }
 
+        if(!words.length) return;
 
-<h2>
-Строим музыкальные инструменты
-</h2>
+        gsap.set(words,{
+            y:45,
+            opacity:0,
+            filter:"blur(2px)"
+        });
 
+        observeOnce(
+            [block],
+            ()=>{
 
-<p>
+                gsap.to(words,{
+                    y:0,
+                    opacity:1,
+                    filter:"blur(0px)",
+                    duration:.7,
+                    stagger:.025,
+                    ease:"power2.out"
+                });
 
-Гравитон — гравитационный аккорд.
-Гул планетарного масштаба.<br>
-Кахон Фибоначчи — перкуссионный ящик в золотой пропорции.
-Сухой глубокий бас.<br>
-Монохорд — одна струна, сто смыслов.
-Медитация в дереве и звуке.
+            },
+            {
+                threshold:.12,
+                rootMargin:"0px 0px -8% 0px"
+            }
+        );
 
-</p>
+    });
 
+}
 
-</div>
 
-
-</section>
-
-
-
-
-
-
-<!-- =========================
-8. MUSIC
-========================= -->
-
-
-<section class="stack-card card-block">
-
-
-<div class="half text">
-
-
-<h2>
-Играем музыку
-</h2>
-
-
-<p>
-
-Каждая встреча заканчивается общей игрой.
-Без нот, без правил.
-Кто-то задаёт ритм на кахоне,
-кто-то ласкает монохорд,
-кто-то просто сидит.<br>
-Записываем фрагмент —
-он уходит в наш закрытый канал в
-<a href="#" class="join-link">Telegram</a>
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="half symbol orange">
-
-
-<img src="images/music.svg" alt="">
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<!-- =========================
-IMAGE 4
-========================= -->
-
-
-<section class="stack-card image-card">
-
-
-<picture>
-
-<source
-media="(max-width:768px)"
-srcset="images/mobile/04.jpg">
-
-
-<img
-src="images/desktop/04.jpg"
-alt="">
-
-
-</picture>
-
-
-</section>
-
-
-
-
-
-
-<!-- =========================
-MASTERCLASSES
-========================= -->
-
-
-<section class="stack-card workshops-block reveal-block">
-
-
-<h2>
-Мастер-классы
-</h2>
-
-
-<p>
-
-Созданы для тех, кому интересно узнать, как устроена работа с деревом.<br>
-
-В мастерской есть всё необходимое: профессианольное оборудование и пространство, где можно спокойно погрузиться в процесс.<br> 
-Занятие ведет мастер с многолетним опытом, который знает особенности разных пород древесины, изучает техники обработки и делится своим подходом. Мы будем проходить основные этапы создания деревянных изделий, пробовать разные техники обработки, 
-наблюдать за характером дерева и постепенно находить свой собственный способ взаимодействия с материалом.<br>
-Без лишней спешки и стремления сделать «идеально», шаг за шагом, мы будем наблюдать, как из бездушной заготовки рождается новое изделие.
-
-</p>
-
-
-</section>
-
-
-
-
-
-
-<!-- =========================
-IMAGE AFTER MASTERCLASSES
-========================= -->
-
-
-<section class="stack-card image-card">
-
-
-<picture>
-
-<source
-media="(max-width:768px)"
-srcset="images/mobile/05.jpg">
-
-
-<img
-src="images/desktop/05.jpg"
-alt="">
-
-
-</picture>
-
-
-</section>
-<!-- =========================
-ДЖЕМЫ
-========================= -->
-
-<section class="stack-card jams-block reveal-block">
-
-
-    <h2>
-        Джемы
-    </h2>
-
-
-    <p>
-
-      Это совместное музыкальное исследование, пространство, где музыка рождается прямо здесь и сейчас.
-
-        Без заранее продуманного плана и ожидания идеального результата — только живое взаимодействие и импровизация.<br>
-        В мастерской есть всё необходимое — гитара, бас, ударные и куча других возможностей извлекать звуки.
-Мы собираемся вместе, настраиваемся на общую волну, берём инструменты и смотрим, куда нас это приведёт.<br>
- Не нужно быть музыкантом — достаточно любопытства и желания попробовать.
-
-        Здесь не важен уровень подготовки.
-
-        Кто-то приходит с опытом, кто-то впервые берёт в руки инструмент.
-
-        Главное — быть открытым, прислушиваться к другим и вместе позволять музыке случаться.
-
-    </p>
-
-
-</section>
-
-<!-- =========================
-IMAGE AFTER JAMS
-========================= -->
-
-
-<section class="stack-card image-card">
-
-
-<picture>
-
-<source
-media="(max-width:768px)"
-srcset="images/mobile/06.jpg">
-
-
-<img
-src="images/desktop/06.jpg"
-alt="">
-
-
-</picture>
-
-
-</section>
-
-
-
-<!-- =========================
-FINAL TEXT
-========================= -->
-
-<section class="stack-card description-block final-text-block reveal-block">
-
-
-    <p>
-
-        <strong>Осторожно!</strong><br>
-
-        За нашим окном — залив, корабли и небо,
-        которое каждый день рисует новый фон.
-
-        Очень легко зависнуть
-        и забыть, зачем пришёл.
-
-    </p>
-
-
-</section>
-
-
-<!-- =========================
+/* =========================================================
 GALLERY
-========================= -->
+========================================================= */
 
+function initGallery(){
 
-<section class="stack-card gallery-card">
+    const images = [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp"
+    ];
 
+    const image = document.getElementById("gallery-image");
+    const mobile = document.getElementById("gallery-mobile");
+    const next = document.getElementById("gallery-next");
+    const prev = document.getElementById("gallery-prev");
 
-<div class="gallery-container">
+    if(!image || !mobile) return;
+    if(image.dataset.galleryInitialized) return;
 
+    image.dataset.galleryInitialized = "true";
 
-<picture>
+    let index = 0;
+    let loading = false;
 
+    /* =====================================================
+       PRELOAD
+    ===================================================== */
 
-<source
-id="gallery-mobile"
-media="(max-width:768px)"
-srcset="images/gallery/mobile/1.jpg">
+    const preload = new Set();
 
+    function preloadImage(i){
 
-<img
-id="gallery-image"
-src="images/gallery/1.jpg"
-alt="">
+        i = (i + images.length) % images.length;
 
+        if(preload.has(i)) return;
 
-</picture>
+        preload.add(i);
 
+        const img = new Image();
 
+        img.src = `images/gallery/${images[i]}`;
 
+        const mobileImg = new Image();
 
+        mobileImg.src =
+            `images/gallery/mobile/${images[i]}`;
 
-<div class="gallery-ui">
+    }
 
+    /* Загружаем первую пару следующих изображений */
+    preloadImage(1);
+    preloadImage(2);
+    preloadImage(images.length - 1);
 
-<button
-class="gallery-arrow gallery-prev"
-id="gallery-prev"
-aria-label="Previous photo">
+    /* =====================================================
+       CHANGE IMAGE
+    ===================================================== */
 
-‹
+    function changeGallery(nextIndex){
 
-</button>
+        if(loading) return;
 
+        index =
+            (nextIndex + images.length) %
+            images.length;
 
+        const file = images[index];
 
+        loading = true;
 
-<button
-class="gallery-arrow gallery-next"
-id="gallery-next"
-aria-label="Next photo">
+        image.style.opacity = "0";
 
-›
+        mobile.srcset =
+            `images/gallery/mobile/${file}`;
 
-</button>
+        const newImage = new Image();
 
+        newImage.onload = () => {
 
-</div>
+            image.src =
+                `images/gallery/${file}`;
 
+            requestAnimationFrame(() => {
 
-</div>
+                image.style.opacity = "1";
+                loading = false;
 
+            });
 
-</section>
+        };
 
+        newImage.onerror = () => {
 
-<!-- =========================
-MEETINGS
-========================= -->
+            image.style.opacity = "1";
+            loading = false;
 
-<section class="stack-card meetings-block reveal-block">
+        };
 
+        newImage.src =
+            `images/gallery/${file}`;
 
-    <p>
+        /* Подгружаем соседние фотографии */
+        preloadImage(index + 1);
+        preloadImage(index - 1);
 
-        Расписание мероприятий пока формируется.
+    }
 
-        Но вы уже можете присоединиться — оставьте свою почту,
-        и мы напишем вам первыми, когда объявим даты новых
-        мастер-классов, джемов и других событий.
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
 
-        А пока можно заглянуть на наши страницы в соц. сетях.
-  Там мы делимся новостями мастерской,
-        рассказываем о будущих встречах
-        и показываем, чем живёт «Пилим и Пилим».
+    next?.addEventListener("click", () => {
+        changeGallery(index + 1);
+    });
 
-    </p>
+    prev?.addEventListener("click", () => {
+        changeGallery(index - 1);
+    });
 
+}
 
-</section>
+/* =========================================================
+MOBILE CONTACT LOGO
+========================================================= */
 
-<!-- =========================
-IMAGE AFTER MEETINGS
-========================= -->
+function initMobileContact(){
 
+    if(!isMobile()) return;
 
-<section class="stack-card image-card">
+    const contact=document.querySelector(".contact-block");
+    const contactLogo=document.querySelector(".contact-end-logo");
 
+    if(!contact || !contactLogo) return;
 
-<picture>
+    if(
+        typeof gsap==="undefined" ||
+        typeof ScrollTrigger==="undefined"
+    ){
+        return;
+    }
 
-<source
-media="(max-width:768px)"
-srcset="images/mobile/07.jpg">
+    gsap.registerPlugin(ScrollTrigger);
 
+    ScrollTrigger.getAll().forEach(trigger=>{
 
-<img
-src="images/desktop/07.jpg"
-alt="">
+        if(
+            trigger.vars &&
+            trigger.vars.trigger===contact
+        ){
+            trigger.kill();
+        }
 
+    });
 
-</picture>
+    gsap.fromTo(
+        contactLogo,
+        {
+            y:0,
+            opacity:1
+        },
+        {
+            y:-120,
+            opacity:0,
+            ease:"none",
+            scrollTrigger:{
+                trigger:contact,
+                start:"top top",
+                end:"top -35%",
+                scrub:true
+            }
+        }
+    );
 
+}
 
-</section>
 
+/* =========================================================
+FIXED LOGO
+========================================================= */
 
+function initFixedLogo(){
 
-<!-- =========================
-CONTACT
-========================= -->
+    const logo=document.querySelector(".logo-fixed");
 
-<section class="stack-card contact-block">
+    if(!logo) return;
 
+    if(logo.dataset.restartInitialized) return;
 
-    <div class="contact-end-logo">
-        ПИЛИМ И ПИЛИМ
-    </div>
+    logo.dataset.restartInitialized="true";
 
+    const darkSections=document.querySelectorAll(
+        [
+            ".dark-section",
+            ".black-section",
+            ".footer",
+            ".contact-block"
+        ].join(",")
+    );
 
+    const sections=document.querySelectorAll(
+        "section, footer, .stack-card, .contact-block"
+    );
 
+    function getLuminance(color){
 
-    <div class="slogan-line">
+        if(!color) return 1;
 
+        const match=color.match(
+            /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/
+        );
 
-        <span class="word light">
-            ПРИШЕЛ.
-        </span>
+        if(!match) return 1;
 
+        let [r,g,b]=match
+            .slice(1)
+            .map(value=>parseInt(value,10)/255);
 
-        <span class="word light">
-            УСЛЫШАЛ.
-        </span>
+        [r,g,b]=[r,g,b].map(value=>
+            value<=.03928
+                ? value/12.92
+                : Math.pow(
+                    (value+.055)/1.055,
+                    2.4
+                )
+        );
 
+        return(
+            .2126*r+
+            .7152*g+
+            .0722*b
+        );
 
-        <span class="word green">
-            ЗАПИЛИЛ.
-        </span>
+    }
 
+    function updateLogoColor(){
 
-    </div>
+        const rect=logo.getBoundingClientRect();
 
+        const logoX=rect.left+rect.width/2;
+        const logoY=rect.top+rect.height/2;
 
+        let isDark=false;
 
+        sections.forEach(section=>{
 
+            const sectionRect=
+                section.getBoundingClientRect();
 
-    <div class="contact-bottom">
+            if(
+                logoX>=sectionRect.left &&
+                logoX<=sectionRect.right &&
+                logoY>=sectionRect.top &&
+                logoY<=sectionRect.bottom
+            ){
 
+                const background=
+                    getComputedStyle(section).backgroundColor;
 
+                if(getLuminance(background)<.35){
+                    isDark=true;
+                }
 
-        <div class="contact-left">
+            }
 
+        });
 
+        darkSections.forEach(section=>{
 
-            <div class="contact-socials">
+            const sectionRect=
+                section.getBoundingClientRect();
 
+            if(
+                logoX>=sectionRect.left &&
+                logoX<=sectionRect.right &&
+                logoY>=sectionRect.top &&
+                logoY<=sectionRect.bottom
+            ){
 
-                <a href="#">
-                    Instagram
-                </a>
+                isDark=true;
 
+            }
 
-                <a href="#">
-                    Telegram
-                </a>
+        });
 
+        logo.classList.toggle("dark",isDark);
 
-                <a href="#">
-                    VK
-                </a>
+    }
 
+    let ticking=false;
 
-            </div>
+    function requestLogoUpdate(){
 
+        if(ticking) return;
 
+        ticking=true;
 
+        requestAnimationFrame(()=>{
 
+            updateLogoColor();
 
-            <form class="contact-input">
+            ticking=false;
 
+        });
 
-                <input
-                type="email"
-                placeholder="name@example">
+    }
 
+    window.addEventListener(
+        "scroll",
+        requestLogoUpdate,
+        {passive:true}
+    );
 
-                <button type="submit">
-                    →
-                </button>
+    window.addEventListener(
+        "resize",
+        requestLogoUpdate,
+        {passive:true}
+    );
 
+    updateLogoColor();
 
-            </form>
 
+    /* =====================================================
+       MOBILE CONTACT POSITION
+    ===================================================== */
 
+    if(isMobile()){
 
-        </div>
+        const contact=
+            document.querySelector(".contact-block");
 
+        if(contact){
 
+            function updateMobileLogo(){
 
+                const rect=
+                    contact.getBoundingClientRect();
 
+                const inside=
+                    rect.top<=window.innerHeight &&
+                    rect.bottom>=0;
 
+                logo.classList.toggle(
+                    "mobile-contact-position",
+                    inside
+                );
 
-        <div class="contact-right">
+            }
 
+            window.addEventListener(
+                "scroll",
+                updateMobileLogo,
+                {passive:true}
+            );
 
-            <span>
-                Кожевенная линия, 34
-            </span>
+            window.addEventListener(
+                "resize",
+                updateMobileLogo,
+                {passive:true}
+            );
 
+            updateMobileLogo();
 
-            <h2>
-                СЕВКАБЕЛЬ-ПОРТ
-            </h2>
+        }
 
+    }
 
-        </div>
 
+    /* =====================================================
+       RESTART ПО КЛИКУ
+    ===================================================== */
 
+    logo.addEventListener("click",event=>{
 
-    </div>
+        event.preventDefault();
 
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
+        let waiting=true;
 
+        function waitForTop(){
 
-</section>
+            if(!waiting) return;
 
+            const currentY=
+                window.scrollY||
+                window.pageYOffset||
+                0;
 
+            if(currentY<=2){
 
+                waiting=false;
 
+                window.removeEventListener(
+                    "scroll",
+                    waitForTop
+                );
 
-<!-- =========================
-END STACK
-========================= -->
+                restartAnimations();
 
+                return;
 
-</div>
+            }
 
+            requestAnimationFrame(waitForTop);
 
+        }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        window.addEventListener(
+            "scroll",
+            waitForTop,
+            {passive:true}
+        );
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        waitForTop();
 
-<script src="script.js"></script>
+    });
 
+}
 
-</body>
 
-</html>
+/* =========================================================
+RESTART ALL ANIMATIONS
+========================================================= */
+
+function restartAnimations(){
+
+    const animatedElements=document.querySelectorAll(
+
+        [
+            ".hero-letter",
+            ".manifest-letter",
+            ".slogan-line .word",
+            ".symbol img",
+            ".description-word",
+            ".contact-end-logo"
+
+        ].join(",")
+
+    );
+
+    gsap.killTweensOf(animatedElements);
+
+
+    if(typeof ScrollTrigger!=="undefined"){
+
+        ScrollTrigger.getAll().forEach(
+            trigger=>trigger.kill()
+        );
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    const heroLetters=
+        document.querySelectorAll(".hero-letter");
+
+    if(heroLetters.length){
+
+        gsap.set(heroLetters,{
+            yPercent:110
+        });
+
+    }
+
+
+    /* =====================================================
+       MANIFEST
+    ===================================================== */
+
+    const manifestLetters=
+        document.querySelectorAll(".manifest-letter");
+
+    if(manifestLetters.length){
+
+        gsap.set(manifestLetters,{
+            y:35,
+            opacity:0,
+            filter:"blur(2px)"
+        });
+
+    }
+
+
+    /* =====================================================
+       SLOGAN
+    ===================================================== */
+
+    const sloganWords=
+        document.querySelectorAll(".slogan-line .word");
+
+    if(sloganWords.length){
+
+        gsap.set(sloganWords,{
+            y:70,
+            opacity:0
+        });
+
+    }
+
+
+    /* =====================================================
+       SYMBOLS
+    ===================================================== */
+
+    const symbols=
+        document.querySelectorAll(".symbol img");
+
+    if(symbols.length){
+
+        gsap.set(symbols,{
+            scale:.82,
+            opacity:0,
+            filter:"blur(8px)",
+            y:30
+        });
+
+    }
+
+
+    /* =====================================================
+       ALL REVEAL WORDS
+    ===================================================== */
+
+    const descriptionWords=
+        document.querySelectorAll(".description-word");
+
+    if(descriptionWords.length){
+
+        gsap.set(descriptionWords,{
+            y:45,
+            opacity:0,
+            filter:"blur(2px)"
+        });
+
+    }
+
+
+    /* =====================================================
+       CONTACT LOGO
+    ===================================================== */
+
+    const contactLogo=
+        document.querySelector(".contact-end-logo");
+
+    if(contactLogo){
+
+        gsap.set(contactLogo,{
+            y:0,
+            opacity:1
+        });
+
+    }
+
+
+    if(typeof ScrollTrigger!=="undefined"){
+        ScrollTrigger.refresh();
+    }
+
+
+    initHero();
+    initManifest();
+    initSlogan();
+    initSymbols();
+    initCards();
+    initTextReveals();
+    initMobileContact();
+
+
+    requestAnimationFrame(()=>{
+
+        window.dispatchEvent(
+            new Event("scroll")
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+
+        if(
+            typeof gsap!=="undefined" &&
+            typeof ScrollTrigger!=="undefined"
+        ){
+
+            gsap.registerPlugin(ScrollTrigger);
+
+        }
+
+        initHero();
+        initManifest();
+        initSlogan();
+        initSymbols();
+        initCards();
+        initTextReveals();
+        initGallery();
+        initMobileContact();
+        initFixedLogo();
+
+    }
+);
