@@ -1,1065 +1,458 @@
-/* =========================================================
-PILIM И PILIM
-JS
-Анимации + повторный запуск после клика по фиксированному логотипу
-========================================================= */
-
-
-/* =========================================================
-UTILS
-========================================================= */
-
-function isMobile(){
-
-    return window.matchMedia("(max-width:768px)").matches;
-
-}
-
-
-function observeOnce(elements,callback,options={}){
-
-    if(!elements || !elements.length) return;
-
-    const observer = new IntersectionObserver(
-
-        (entries,obs)=>{
-
-            entries.forEach(entry=>{
-
-                if(!entry.isIntersecting) return;
-
-                callback(entry.target);
-
-                obs.unobserve(entry.target);
-
-            });
-
-        },
-
-        {
-            threshold:options.threshold ?? .15,
-            rootMargin:options.rootMargin ?? "0px 0px -10% 0px"
-        }
-
-    );
-
-    elements.forEach(element=>observer.observe(element));
-
-    return observer;
-
-}
-
-
-/* =========================================================
-HERO
-========================================================= */
-
-function initHero(){
-
-    const hero=document.querySelector(".hero-title");
-
-    if(!hero) return;
-
-    if(!hero.querySelector(".hero-letter")){
-
-        const walker=document.createTreeWalker(
-            hero,
-            NodeFilter.SHOW_TEXT
-        );
-
-        const textNodes=[];
-
-        while(walker.nextNode()){
-            textNodes.push(walker.currentNode);
-        }
-
-        textNodes.forEach(node=>{
-
-            const fragment=document.createDocumentFragment();
-
-            [...node.textContent].forEach(char=>{
-
-                if(char===" "){
-
-                    fragment.appendChild(
-                        document.createTextNode(" ")
-                    );
-
-                    return;
-
-                }
-
-                const wrap=document.createElement("span");
-                wrap.className="hero-letter-wrap";
-
-                const letter=document.createElement("span");
-                letter.className="hero-letter";
-                letter.textContent=char;
-
-                wrap.appendChild(letter);
-                fragment.appendChild(wrap);
-
-            });
-
-            node.replaceWith(fragment);
-
-        });
-
-    }
-
-    const letters=hero.querySelectorAll(".hero-letter");
-
-    if(!letters.length) return;
-
-    gsap.set(letters,{
-        yPercent:110
-    });
-
-    gsap.to(letters,{
-        yPercent:0,
-        duration:.9,
-        stagger:.045,
-        ease:"power4.out"
-    });
-
-}
-
-
-/* =========================================================
-MANIFEST
-========================================================= */
-
-function initManifest(){
-
-    const block=document.querySelector(".manifest-block");
-
-    if(!block) return;
-
-    block.querySelectorAll(".line").forEach(line=>{
-
-        if(line.querySelector(".manifest-letter")) return;
-
-        const text=line.textContent.trim();
-        const fragment=document.createDocumentFragment();
-
-        text.split(/\s+/).forEach((word,index,words)=>{
-
-            const wordWrap=document.createElement("span");
-
-            wordWrap.className="manifest-word";
-
-            if(word.toUpperCase()==="МАСТЕРСКАЯ"){
-                wordWrap.classList.add("manifest-workshop-word");
-            }
-
-            wordWrap.style.cssText=
-                "display:inline-block;vertical-align:top;";
-
-            [...word].forEach(char=>{
-
-                const letter=document.createElement("span");
-
-                letter.className="manifest-letter";
-                letter.textContent=char;
-                letter.style.display="inline-block";
-
-                wordWrap.appendChild(letter);
-
-            });
-
-            fragment.appendChild(wordWrap);
-
-            if(index<words.length-1){
-
-                fragment.appendChild(
-                    document.createTextNode(" ")
-                );
-
-            }
-
-        });
-
-        line.replaceChildren(fragment);
-
-    });
-
-    const letters=block.querySelectorAll(".manifest-letter");
-
-    if(!letters.length) return;
-
-    gsap.set(letters,{
-        y:35,
-        opacity:0,
-        filter:"blur(2px)"
-    });
-
-    observeOnce(
-        [block],
-        ()=>{
-
-            gsap.to(letters,{
-                y:0,
-                opacity:1,
-                filter:"blur(0px)",
-                duration:.55,
-                stagger:.018,
-                ease:"power2.out"
-            });
-
-        },
-        {
-            threshold:.15,
-            rootMargin:"0px 0px -15% 0px"
-        }
-    );
-
-}
-
-
-/* =========================================================
-CONTACT SLOGAN
-========================================================= */
-
-function initSlogan(){
-
-    const contact=document.querySelector(".contact-block");
-    const words=contact?.querySelectorAll(".slogan-line .word");
-
-    if(!contact || !words?.length) return;
-
-    const accent=contact.querySelector(".slogan-accent");
-
-    if(accent){
-
-        accent.style.setProperty(
-            "color",
-            "#7182CB",
-            "important"
-        );
-
-    }
-
-    gsap.set(words,{
-        y:70,
-        opacity:0
-    });
-
-    observeOnce(
-        [contact],
-        ()=>{
-
-            gsap.to(words,{
-                y:0,
-                opacity:1,
-                duration:1.1,
-                stagger:.25,
-                ease:"power4.out"
-            });
-
-        },
-        {
-            threshold:.2,
-            rootMargin:"0px 0px -10% 0px"
-        }
-    );
-
-}
-
-
-/* =========================================================
-SYMBOLS
-========================================================= */
-
-function initSymbols(){
-
-    const symbols=document.querySelectorAll(".symbol img");
-
-    if(!symbols.length) return;
-
-    gsap.set(symbols,{
-        scale:.82,
-        opacity:0,
-        filter:"blur(8px)",
-        y:30
-    });
-
-    observeOnce(
-        symbols,
-        symbol=>{
-
-            gsap.to(symbol,{
-                scale:1,
-                opacity:1,
-                filter:"blur(0px)",
-                y:0,
-                duration:1.1,
-                ease:"power3.out"
-            });
-
-        },
-        {
-            threshold:.2,
-            rootMargin:"0px 0px -10% 0px"
-        }
-    );
-
-}
-
-
-/* =========================================================
-CARDS
-========================================================= */
-
-function initCards(){
-
-    const cards=document.querySelectorAll(".card-block");
-
-    if(!cards.length) return;
-
-    /*
-       Заголовки больше не анимируем,
-       так как они скрыты через CSS.
-
-       Текст карточек проходит через
-       общую word-by-word reveal-анимацию
-       в initTextReveals().
-    */
-
-}
-
-
-/* =========================================================
-LONG TEXT
-========================================================= */
-
-function initTextReveals(){
-
-    const selectors=[
-
-        ".description-block p",
-        ".workshops-block p",
-        ".jams-block p",
-        ".meetings-block p",
-        ".final-text-block p",
-        ".card-block .text p"
-
-    ];
-
-    const blocks=document.querySelectorAll(
-        selectors.join(",")
-    );
-
-    if(!blocks.length) return;
-
-    blocks.forEach(block=>{
-
-        let words=block.querySelectorAll(
-            ".description-word"
-        );
-
-        if(!words.length){
-
-            const walker=document.createTreeWalker(
-                block,
-                NodeFilter.SHOW_TEXT
-            );
-
-            const textNodes=[];
-
-            while(walker.nextNode()){
-                textNodes.push(walker.currentNode);
-            }
-
-            textNodes.forEach(node=>{
-
-                if(!node.textContent.trim()) return;
-
-                const fragment=document.createDocumentFragment();
-
-                node.textContent
-                    .split(/(\s+)/)
-                    .forEach(part=>{
-
-                        if(!part.trim()){
-
-                            fragment.appendChild(
-                                document.createTextNode(part)
-                            );
-
-                            return;
-
-                        }
-
-                        const span=document.createElement("span");
-
-                        span.className="description-word";
-                        span.textContent=part;
-                        span.style.display="inline-block";
-
-                        fragment.appendChild(span);
-
-                    });
-
-                node.replaceWith(fragment);
-
-            });
-
-            words=block.querySelectorAll(
-                ".description-word"
-            );
-
-        }
-
-        if(!words.length) return;
-
-        gsap.set(words,{
-            y:45,
-            opacity:0,
-            filter:"blur(2px)"
-        });
-
-        observeOnce(
-            [block],
-            ()=>{
-
-                gsap.to(words,{
-                    y:0,
-                    opacity:1,
-                    filter:"blur(0px)",
-                    duration:.7,
-                    stagger:.025,
-                    ease:"power2.out"
-                });
-
-            },
-            {
-                threshold:.12,
-                rootMargin:"0px 0px -8% 0px"
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-GALLERY
-========================================================= */
-
-function initGallery(){
-
-    const images = [
-        "1.webp",
-        "2.webp",
-        "3.webp",
-        "4.webp",
-        "5.webp",
-        "6.webp",
-        "7.webp",
-        "8.webp"
-    ];
-
-    const image = document.getElementById("gallery-image");
-    const mobile = document.getElementById("gallery-mobile");
-    const next = document.getElementById("gallery-next");
-    const prev = document.getElementById("gallery-prev");
-
-    if(!image || !mobile) return;
-    if(image.dataset.galleryInitialized) return;
-
-    image.dataset.galleryInitialized = "true";
-
-    let index = 0;
-    let loading = false;
-
-    /* =====================================================
-       PRELOAD
-    ===================================================== */
-
-    const preload = new Set();
-
-    function preloadImage(i){
-
-        i = (i + images.length) % images.length;
-
-        if(preload.has(i)) return;
-
-        preload.add(i);
-
-        const img = new Image();
-
-        img.src = `images/gallery/${images[i]}`;
-
-        const mobileImg = new Image();
-
-        mobileImg.src =
-            `images/gallery/mobile/${images[i]}`;
-
-    }
-
-    /* Загружаем первую пару следующих изображений */
-    preloadImage(1);
-    preloadImage(2);
-    preloadImage(images.length - 1);
-
-    /* =====================================================
-       CHANGE IMAGE
-    ===================================================== */
-
-    function changeGallery(nextIndex){
-
-        if(loading) return;
-
-        index =
-            (nextIndex + images.length) %
-            images.length;
-
-        const file = images[index];
-
-        loading = true;
-
-        image.style.opacity = "0";
-
-        mobile.srcset =
-            `images/gallery/mobile/${file}`;
-
-        const newImage = new Image();
-
-        newImage.onload = () => {
-
-            image.src =
-                `images/gallery/${file}`;
-
-            requestAnimationFrame(() => {
-
-                image.style.opacity = "1";
-                loading = false;
-
-            });
-
-        };
-
-        newImage.onerror = () => {
-
-            image.style.opacity = "1";
-            loading = false;
-
-        };
-
-        newImage.src =
-            `images/gallery/${file}`;
-
-        /* Подгружаем соседние фотографии */
-        preloadImage(index + 1);
-        preloadImage(index - 1);
-
-    }
-
-    /* =====================================================
-       BUTTONS
-    ===================================================== */
-
-    next?.addEventListener("click", () => {
-        changeGallery(index + 1);
-    });
-
-    prev?.addEventListener("click", () => {
-        changeGallery(index - 1);
-    });
-
-}
-
-/* =========================================================
-MOBILE CONTACT LOGO
-========================================================= */
-
-function initMobileContact(){
-
-    if(!isMobile()) return;
-
-    const contact=document.querySelector(".contact-block");
-    const contactLogo=document.querySelector(".contact-end-logo");
-
-    if(!contact || !contactLogo) return;
-
-    if(
-        typeof gsap==="undefined" ||
-        typeof ScrollTrigger==="undefined"
-    ){
-        return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    ScrollTrigger.getAll().forEach(trigger=>{
-
-        if(
-            trigger.vars &&
-            trigger.vars.trigger===contact
-        ){
-            trigger.kill();
-        }
-
-    });
-
-    gsap.fromTo(
-        contactLogo,
-        {
-            y:0,
-            opacity:1
-        },
-        {
-            y:-120,
-            opacity:0,
-            ease:"none",
-            scrollTrigger:{
-                trigger:contact,
-                start:"top top",
-                end:"top -35%",
-                scrub:true
-            }
-        }
-    );
-
-}
-
-
-/* =========================================================
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПИЛИМ И ПИЛИМ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
 FIXED LOGO
-========================================================= */
+========================================================= -->
 
-function initFixedLogo(){
+<a href="#" class="logo-fixed" aria-label="Пилим и Пилим">
+    <img decoding="async" src="images/logo.svg" alt="Пилим и Пилим">
+</a>
 
-    const logo=document.querySelector(".logo-fixed");
+<div class="main-stack">
 
-    if(!logo) return;
+<!-- =========================================================
+HERO
+========================================================= -->
 
-    if(logo.dataset.restartInitialized) return;
+<section class="stack-card hero-block">
 
-    logo.dataset.restartInitialized="true";
+    <div class="hero-title">
+        ПИЛИМ И<br>
+        ПИЛИМ
+    </div>
 
-    const darkSections=document.querySelectorAll(
-        [
-            ".dark-section",
-            ".black-section",
-            ".footer",
-            ".contact-block"
-        ].join(",")
-    );
+</section>
 
-    const sections=document.querySelectorAll(
-        "section, footer, .stack-card, .contact-block"
-    );
+<!-- =========================================================
+MANIFEST
+========================================================= -->
 
-    function getLuminance(color){
+<section class="stack-card manifest-block">
 
-        if(!color) return 1;
+    <div class="manifest-content">
 
-        const match=color.match(
-            /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/
-        );
+        <h1>
 
-        if(!match) return 1;
+            <span class="manifest-desktop">
 
-        let [r,g,b]=match
-            .slice(1)
-            .map(value=>parseInt(value,10)/255);
+                <span class="line">
+                    · Мастерская звука и дерева
+                </span>
 
-        [r,g,b]=[r,g,b].map(value=>
-            value<=.03928
-                ? value/12.92
-                : Math.pow(
-                    (value+.055)/1.055,
-                    2.4
-                )
-        );
+                <span class="line">
+                    <span class="small-gap">в</span> Севкабель-Порту
+                </span>
 
-        return(
-            .2126*r+
-            .7152*g+
-            .0722*b
-        );
+            </span>
 
-    }
+            <span class="manifest-mobile">
 
-    function updateLogoColor(){
+                <span class="line">
+                    Мастерская
+                </span>
 
-        const rect=logo.getBoundingClientRect();
+                <span class="line">
+                    звука и дерева
+                </span>
 
-        const logoX=rect.left+rect.width/2;
-        const logoY=rect.top+rect.height/2;
+                <span class="line">
+                    <span class="small-gap">· в</span> Севкабель-Порту
+                </span>
 
-        let isDark=false;
+            </span>
 
-        sections.forEach(section=>{
+        </h1>
 
-            const sectionRect=
-                section.getBoundingClientRect();
+    </div>
 
-            if(
-                logoX>=sectionRect.left &&
-                logoX<=sectionRect.right &&
-                logoY>=sectionRect.top &&
-                logoY<=sectionRect.bottom
-            ){
+</section>
 
-                const background=
-                    getComputedStyle(section).backgroundColor;
+<!-- =========================================================
+IMAGE 01
+========================================================= -->
 
-                if(getLuminance(background)<.35){
-                    isDark=true;
-                }
+<section class="stack-card image-card">
 
-            }
+    <picture>
+        <source
+            media="(max-width:768px)"
+            srcset="images/mobile/01.webp">
 
-        });
+        <img
+            decoding="async"
+            src="images/desktop/01.webp"
+            alt="">
+    </picture>
 
-        darkSections.forEach(section=>{
+</section>
 
-            const sectionRect=
-                section.getBoundingClientRect();
+<!-- =========================================================
+DESCRIPTION
+========================================================= -->
 
-            if(
-                logoX>=sectionRect.left &&
-                logoX<=sectionRect.right &&
-                logoY>=sectionRect.top &&
-                logoY<=sectionRect.bottom
-            ){
+<section class="stack-card description-block reveal-block">
 
-                isDark=true;
+    <p>
+        «Пилим и Пилим» — независимая мастерская,
+        объединяющая ремесло, музыку и культуру
+        совместного творчества. Мы пьем чай, создаём предметы
+        из дерева, строим музыкальные инструменты, играем музыку
+        и тем самым исследуем то, как материалы,
+        звук и люди могут вдохновлять друг друга.
+    </p>
 
-            }
+</section>
 
-        });
+<!-- =========================================================
+IMAGE 02
+========================================================= -->
 
-        logo.classList.toggle("dark",isDark);
+<section class="stack-card image-card">
 
-    }
+    <picture>
+        <source
+            media="(max-width:768px)"
+            srcset="images/mobile/02.webp">
 
-    let ticking=false;
+        <img
+            loading="lazy"
+            decoding="async"
+            src="images/desktop/02.webp"
+            alt="">
+    </picture>
 
-    function requestLogoUpdate(){
+</section>
 
-        if(ticking) return;
+<!-- =========================================================
+TEA
+========================================================= -->
 
-        ticking=true;
+<section class="stack-card card-block">
 
-        requestAnimationFrame(()=>{
+    <div class="half symbol orange">
 
-            updateLogoColor();
+        <img
+            loading="lazy"
+            decoding="async"
+            src="images/tea.svg"
+            alt="">
 
-            ticking=false;
+    </div>
 
-        });
+    <div class="half text">
 
-    }
+        <a href="tea/" class="card-link">
+            <span>Чайная</span>
+            <span class="card-arrow">↗</span>
+        </a>
 
-    window.addEventListener(
-        "scroll",
-        requestLogoUpdate,
-        {passive:true}
-    );
+        <p>
+            Пауза — настройка слуха.
+            Завариваем, разливаем, молчим.
+            Слушаем воду,
+            стук пиал, дыхание залива.<br>
 
-    window.addEventListener(
-        "resize",
-        requestLogoUpdate,
-        {passive:true}
-    );
+            Чаем занимается Хранитель пауз.
+            Посуда — ручная работа, можно заполучить.
+        </p>
 
-    updateLogoColor();
+    </div>
 
+</section>
 
-    /* =====================================================
-       MOBILE CONTACT POSITION
-    ===================================================== */
 
-    if(isMobile()){
+<!-- =========================================================
+WOOD / WORKSHOPS
+========================================================= -->
 
-        const contact=
-            document.querySelector(".contact-block");
+<section class="stack-card card-block">
 
-        if(contact){
+    <div class="half text">
 
-            function updateMobileLogo(){
+        <a href="workshops/index.html" class="card-link">
+            <span>Мастер-классы</span>
+            <span class="card-arrow">↗</span>
+        </a>
 
-                const rect=
-                    contact.getBoundingClientRect();
+        <p>
+            Чайные принадлежности и другая красота из дерева разных пород.
+            Масло вместо лака.
+            Слышишь? — это дерево дышит.<br>
 
-                const inside=
-                    rect.top<=window.innerHeight &&
-                    rect.bottom>=0;
+            Каждая поверхность хранит след инструмента и времени.
+        </p>
 
-                logo.classList.toggle(
-                    "mobile-contact-position",
-                    inside
-                );
+    </div>
 
-            }
+    <div class="half symbol green">
 
-            window.addEventListener(
-                "scroll",
-                updateMobileLogo,
-                {passive:true}
-            );
+        <img
+            loading="lazy"
+            decoding="async"
+            src="images/wood.svg"
+            alt="">
 
-            window.addEventListener(
-                "resize",
-                updateMobileLogo,
-                {passive:true}
-            );
+    </div>
 
-            updateMobileLogo();
+</section>
 
-        }
 
-    }
+<!-- =========================================================
+INSTRUMENTS / JAMS
+========================================================= -->
 
+<section class="stack-card card-block instruments">
 
-    /* =====================================================
-       RESTART ПО КЛИКУ
-    ===================================================== */
+    <div class="half symbol purple">
 
-    logo.addEventListener("click",event=>{
+        <img
+            loading="lazy"
+            decoding="async"
+            src="images/instruments.svg"
+            alt="">
 
-        event.preventDefault();
+    </div>
 
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
+    <div class="half text">
 
-        let waiting=true;
+        <a href="jams/index.html" class="card-link">
+            <span>Джемы</span>
+            <span class="card-arrow">↗</span>
+        </a>
 
-        function waitForTop(){
+        <p>
+            Каждая встреча заканчивается общей игрой.
+            Без нот, без правил.
+            Кто-то задаёт ритм на кахоне,
+            кто-то ласкает монохорд,
+            кто-то просто сидит.
 
-            if(!waiting) return;
+            Записываем фрагмент —
+            он уходит в наш закрытый канал в
+            <a href="#" class="join-link">Telegram</a>
+        </p>
 
-            const currentY=
-                window.scrollY||
-                window.pageYOffset||
-                0;
+    </div>
 
-            if(currentY<=2){
+</section>
 
-                waiting=false;
 
-                window.removeEventListener(
-                    "scroll",
-                    waitForTop
-                );
+<!-- =========================================================
+IMAGE 03
+========================================================= -->
 
-                restartAnimations();
+<section class="stack-card image-card">
 
-                return;
+    <picture>
 
-            }
+        <source
+            media="(max-width:768px)"
+            srcset="images/mobile/03.webp">
 
-            requestAnimationFrame(waitForTop);
+        <img
+            loading="lazy"
+            decoding="async"
+            src="images/desktop/03.webp"
+            alt="">
 
-        }
+    </picture>
 
-        window.addEventListener(
-            "scroll",
-            waitForTop,
-            {passive:true}
-        );
+</section>
 
-        waitForTop();
+<!-- =========================================================
+FINAL TEXT
+========================================================= -->
 
-    });
+<section class="stack-card description-block final-text-block reveal-block">
 
-}
+    <p>
+        <strong>· Осторожно!</strong><br>
 
+        За нашим окном — залив, корабли и небо,
+        которое каждый день рисует новый фон.
+        Очень легко зависнуть
+        и забыть, зачем пришёл.
+    </p>
 
-/* =========================================================
-RESTART ALL ANIMATIONS
-========================================================= */
+</section>
 
-function restartAnimations(){
+<!-- =========================================================
+GALLERY
+========================================================= -->
 
-    const animatedElements=document.querySelectorAll(
+<section class="stack-card gallery-card">
 
-        [
-            ".hero-letter",
-            ".manifest-letter",
-            ".slogan-line .word",
-            ".symbol img",
-            ".description-word",
-            ".contact-end-logo"
+    <div class="gallery-container">
 
-        ].join(",")
+        <picture>
 
-    );
+            <source
+                id="gallery-mobile"
+                media="(max-width:768px)"
+                srcset="images/gallery/mobile/1.webp">
 
-    gsap.killTweensOf(animatedElements);
+            <img
+                loading="lazy"
+                decoding="async"
+                id="gallery-image"
+                src="images/gallery/1.webp"
+                alt="">
 
+        </picture>
 
-    if(typeof ScrollTrigger!=="undefined"){
+        <div class="gallery-ui">
 
-        ScrollTrigger.getAll().forEach(
-            trigger=>trigger.kill()
-        );
+            <button
+                class="gallery-arrow gallery-prev"
+                id="gallery-prev"
+                aria-label="Previous photo">
+                ‹
+            </button>
 
-    }
+            <button
+                class="gallery-arrow gallery-next"
+                id="gallery-next"
+                aria-label="Next photo">
+                ›
+            </button>
 
+        </div>
 
-    /* =====================================================
-       HERO
-    ===================================================== */
+    </div>
 
-    const heroLetters=
-        document.querySelectorAll(".hero-letter");
+</section>
 
-    if(heroLetters.length){
+<!-- =========================================================
+MEETINGS
+========================================================= -->
 
-        gsap.set(heroLetters,{
-            yPercent:110
-        });
+<section class="stack-card meetings-block reveal-block">
 
-    }
+    <p>
+        · Расписание мероприятий пока формируется.<br>
+        Но вы уже можете присоединиться — оставьте свою почту,
+        и мы напишем вам первыми, когда объявим даты новых
+        мастер-классов, джемов и других событий.
 
+        А пока можно заглянуть на наши страницы в соц. сетях.
+        Там мы делимся новостями мастерской,
+        рассказываем о будущих встречах
+        и показываем, чем живёт «Пилим и Пилим».
+    </p>
 
-    /* =====================================================
-       MANIFEST
-    ===================================================== */
+</section>
 
-    const manifestLetters=
-        document.querySelectorAll(".manifest-letter");
 
-    if(manifestLetters.length){
+<!-- =========================================================
+CONTACT
+========================================================= -->
 
-        gsap.set(manifestLetters,{
-            y:35,
-            opacity:0,
-            filter:"blur(2px)"
-        });
+<section class="stack-card contact-block">
 
-    }
+    <div class="contact-end-logo">
+        ПИЛИМ И ПИЛИМ
+    </div>
 
+    <div class="slogan-line">
 
-    /* =====================================================
-       SLOGAN
-    ===================================================== */
+        <span class="word light">
+            ПРИШЕЛ.
+        </span>
 
-    const sloganWords=
-        document.querySelectorAll(".slogan-line .word");
+        <span class="word light">
+            УСЛЫШАЛ.
+        </span>
 
-    if(sloganWords.length){
+        <span class="word slogan-accent">
+            ЗАПИЛИЛ.
+        </span>
 
-        gsap.set(sloganWords,{
-            y:70,
-            opacity:0
-        });
+    </div>
 
-    }
+    <div class="contact-bottom">
 
+        <div class="contact-left">
 
-    /* =====================================================
-       SYMBOLS
-    ===================================================== */
+            <div class="contact-socials">
 
-    const symbols=
-        document.querySelectorAll(".symbol img");
+                <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Instagram
+                </a>
 
-    if(symbols.length){
+                <a
+                    href="https://t.me/pilimipilim"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Telegram
+                </a>
 
-        gsap.set(symbols,{
-            scale:.82,
-            opacity:0,
-            filter:"blur(8px)",
-            y:30
-        });
+                <a
+                    href="https://vk.ru/pilimipilim"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    VK
+                </a>
 
-    }
+            </div>
 
+            <form class="contact-input">
 
-    /* =====================================================
-       ALL REVEAL WORDS
-    ===================================================== */
+                <input
+                    type="email"
+                    placeholder="name@example">
 
-    const descriptionWords=
-        document.querySelectorAll(".description-word");
+                <button type="submit">
+                    →
+                </button>
 
-    if(descriptionWords.length){
+            </form>
 
-        gsap.set(descriptionWords,{
-            y:45,
-            opacity:0,
-            filter:"blur(2px)"
-        });
+        </div>
 
-    }
+        <div class="contact-right">
 
+            <span>
+                Кожевенная линия, 34
+            </span>
 
-    /* =====================================================
-       CONTACT LOGO
-    ===================================================== */
+            <h2>
+                <a
+                    href="https://sevcableport.ru/"
+                    class="sevcable-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    СЕВКАБЕЛЬ-ПОРТ
+                </a>
+            </h2>
 
-    const contactLogo=
-        document.querySelector(".contact-end-logo");
+        </div>
 
-    if(contactLogo){
+    </div>
 
-        gsap.set(contactLogo,{
-            y:0,
-            opacity:1
-        });
+</section>
 
-    }
+</div>
 
+<!-- =========================================================
+LOCAL SCRIPTS
+========================================================= -->
 
-    if(typeof ScrollTrigger!=="undefined"){
-        ScrollTrigger.refresh();
-    }
+<script defer src="js/gsap.min.js"></script>
+<script defer src="js/ScrollTrigger.min.js"></script>
+<script defer src="script.js"></script>
 
-
-    initHero();
-    initManifest();
-    initSlogan();
-    initSymbols();
-    initCards();
-    initTextReveals();
-    initMobileContact();
-
-
-    requestAnimationFrame(()=>{
-
-        window.dispatchEvent(
-            new Event("scroll")
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-START
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    ()=>{
-
-        if(
-            typeof gsap!=="undefined" &&
-            typeof ScrollTrigger!=="undefined"
-        ){
-
-            gsap.registerPlugin(ScrollTrigger);
-
-        }
-
-        initHero();
-        initManifest();
-        initSlogan();
-        initSymbols();
-        initCards();
-        initTextReveals();
-        initGallery();
-        initMobileContact();
-        initFixedLogo();
-
-    }
-);
+</body>
+</html>
