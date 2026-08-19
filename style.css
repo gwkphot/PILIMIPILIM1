@@ -577,7 +577,7 @@ MOBILE
     .card-link{
         order:1;
 
-        font-size:52px;
+        font-size:48px;
         line-height:.88;
         letter-spacing:-.055em;
 
@@ -610,7 +610,7 @@ SMALL MOBILE
     }
 
     .card-link{
-        font-size:48px;
+        font-size:44px;
         gap:7px;
         margin-bottom:14px;
     }
