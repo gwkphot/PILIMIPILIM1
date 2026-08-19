@@ -566,7 +566,7 @@ MOBILE
         height:50vh;
         order:2;
 
-        padding:14px;
+        padding:14px 28px;
 
         display:flex;
         flex-direction:column;
@@ -606,7 +606,7 @@ SMALL MOBILE
 @media(max-width:480px){
 
     .text{
-        padding:14px;
+        padding:14px 24px;
     }
 
     .card-link{
@@ -622,7 +622,6 @@ SMALL MOBILE
     }
 
 }
-
 
 
 
